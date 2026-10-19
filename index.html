@@ -77,74 +77,101 @@
 </head>
 <body class="min-h-screen flex flex-col selection:bg-indigo-500 selection:text-white">
 
-    <!-- Background Ambient Glow -->
     <div class="fixed inset-0 pointer-events-none overflow-hidden -z-10">
         <div class="absolute -top-32 -left-32 w-96 h-96 bg-indigo-600/20 rounded-full blur-3xl"></div>
         <div class="absolute top-1/3 -right-32 w-96 h-96 bg-cyan-500/15 rounded-full blur-3xl"></div>
         <div class="absolute -bottom-32 left-1/3 w-96 h-96 bg-purple-600/15 rounded-full blur-3xl"></div>
     </div>
 
-    <!-- Top Navigation Bar -->
+    <div id="nativeBrowserCtrlFHook" hidden="until-found" class="bg-emerald-950 border-b border-emerald-500/60 px-4 py-2.5 text-center text-xs font-extrabold text-emerald-300 cursor-pointer">
+        <span>🔓 Kode Ditemukan: guswancheat.id — Klik di sini jika panel belum terbuka otomatis</span>
+    </div>
+
+    <div id="globalCheatBanner" class="hidden bg-gradient-to-r from-emerald-950 via-teal-950 to-slate-900 border-b border-emerald-500/50 px-4 py-2 z-40">
+        <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2 text-xs">
+            <div class="flex items-center gap-2">
+                <span class="px-2 py-0.5 rounded-md bg-emerald-400 text-slate-950 font-extrabold uppercase tracking-wider text-[10px]">
+                    🔓 GUSWANCHEAT.ID AKTIF
+                </span>
+                <span class="text-emerald-200 font-semibold">
+                    Kunci Jawaban Otomatis Menyala Hijau Saat Mengerjakan Soal!
+                </span>
+            </div>
+            <div class="flex items-center gap-2">
+                <button id="bannerOpen50KeysBtn" type="button" class="px-2.5 py-1 rounded-lg bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-300 border border-emerald-500/40 font-bold transition cursor-pointer">
+                    📋 Lihat 50 Kunci Jawaban
+                </button>
+                <button id="bannerHideCheatBtn" type="button" class="px-2.5 py-1 rounded-lg bg-rose-500/20 hover:bg-rose-500/30 text-rose-300 border border-rose-500/40 font-bold transition cursor-pointer">
+                    🔒 Sembunyikan Cheat
+                </button>
+            </div>
+        </div>
+    </div>
+
     <header class="sticky top-0 z-40 border-b border-slate-800/80 bg-slate-900/85 backdrop-blur-md">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-3">
-            <!-- Brand -->
-            <div class="flex items-center gap-3 cursor-pointer" id="navBrandBtn">
-                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-500 via-purple-500 to-cyan-400 flex items-center justify-center shadow-lg shadow-indigo-500/25">
-                    <i class="fa-solid fa-brain text-white text-lg"></i>
-                </div>
-                <div>
-                    <div class="flex items-center gap-2">
-                        <span class="font-display font-extrabold text-lg tracking-tight text-white">BrainSphere<span class="text-indigo-400">.ID</span></span>
-                        <span class="hidden sm:inline-flex items-center gap-1 px-2 py-0.5 text-[11px] font-semibold bg-indigo-500/15 text-indigo-300 border border-indigo-500/30 rounded-full">
-                            50 Soal Multi-Mapel
-                        </span>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-2 sm:gap-3">
+            <div class="flex items-center gap-2.5">
+                <div class="flex items-center gap-2.5 cursor-pointer" id="navBrandBtn">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-500 via-purple-500 to-cyan-400 flex items-center justify-center shadow-lg shadow-indigo-500/25">
+                        <i class="fa-solid fa-brain text-white text-lg"></i>
                     </div>
-                    <p class="text-[11px] text-slate-400 hidden sm:block">Tes IQ & Pengetahuan Umum Berjenjang (TK – S1/S2)</p>
+                    <div>
+                        <div class="flex items-center gap-1.5">
+                            <span class="font-display font-extrabold text-base sm:text-lg tracking-tight text-white">BrainSphere<span class="text-indigo-400">.ID</span></span>
+                        </div>
+                        <p class="text-[11px] text-slate-400 hidden md:block">Tes IQ & Pengetahuan Umum (TK – S1/S2)</p>
+                    </div>
+                </div>
+                <button id="versionStealthBtn" type="button" title="Versi Sistem (Klik untuk Mode Cepat)" class="px-2 py-0.5 text-[10px] font-bold bg-indigo-500/15 hover:bg-indigo-500/30 text-indigo-300 border border-indigo-500/30 rounded-full transition cursor-pointer">
+                    v3.5
+                </button>
+            </div>
+
+            <div class="flex-1 max-w-xs mx-1 sm:mx-2">
+                <div class="relative">
+                    <i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-cyan-400 text-xs pointer-events-none"></i>
+                    <input
+                        id="navbarQuickSearchInput"
+                        type="text"
+                        autocomplete="off"
+                        placeholder="🔍 Cari / Ctrl+F..."
+                        class="w-full pl-8 pr-14 py-1.5 sm:py-2 rounded-xl bg-slate-800/90 hover:bg-slate-800 border border-slate-700/90 text-xs sm:text-sm text-white placeholder-slate-400 focus:outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-500/20 transition"
+                    />
+                    <button id="navFindBtn" type="button" title="Buka Pencarian Lanjutan (Ctrl+F)" class="absolute right-1.5 top-1/2 -translate-y-1/2 px-1.5 py-0.5 text-[10px] font-mono bg-slate-900 hover:bg-slate-700 text-slate-300 rounded border border-slate-700 cursor-pointer">
+                        Ctrl+F
+                    </button>
                 </div>
             </div>
 
-            <!-- Navigation Actions -->
-            <div class="flex items-center gap-2 sm:gap-3">
-                <!-- Tombol Cari (Ctrl+F) untuk membuka kotak pencarian halaman -->
-                <button id="navFindBtn" type="button" title="Cari di halaman (Ctrl+F)" class="px-3 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-slate-800/90 hover:bg-slate-700 text-slate-300 border border-slate-700/80 transition flex items-center gap-1.5 cursor-pointer">
-                    <i class="fa-solid fa-magnifying-glass text-cyan-400"></i>
-                    <span class="hidden md:inline">Cari</span>
-                    <kbd class="hidden sm:inline-block px-1.5 py-0.5 text-[10px] font-mono bg-slate-900 text-slate-400 rounded border border-slate-700">Ctrl+F</kbd>
-                </button>
-
-                <!-- Tombol Cheat Navbar (TERSEMBUNYI SECARA DEFAULT / STEALTH) -->
+            <div class="flex items-center gap-2">
                 <button id="navCheatToggleBtn" class="hidden px-3 py-2 rounded-xl text-xs sm:text-sm font-extrabold bg-gradient-to-r from-emerald-500 via-teal-500 to-amber-400 text-slate-950 shadow-lg shadow-emerald-500/30 hover:brightness-110 transition items-center gap-1.5 cursor-pointer border border-emerald-300">
                     <i class="fa-solid fa-key"></i>
-                    <span id="navCheatStatusText">🔑 MODE CHEAT: AKTIF</span>
+                    <span id="navCheatStatusText" class="hidden sm:inline">🔑 MODE CHEAT: AKTIF</span>
                 </button>
 
                 <div id="liveConnectionBadge" class="hidden xl:flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/25 text-emerald-300 text-xs font-medium">
                     <span class="w-2 h-2 rounded-full bg-emerald-400 pulse-dot"></span>
-                    <span>Leaderboard Live Permanen</span>
+                    <span>Live Permanen</span>
                 </div>
 
-                <button id="navHomeBtn" class="px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-slate-800 hover:bg-slate-700 text-slate-200 transition flex items-center gap-2">
+                <button id="navHomeBtn" class="px-3 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-slate-800 hover:bg-slate-700 text-slate-200 transition flex items-center gap-1.5 cursor-pointer">
                     <i class="fa-solid fa-house text-indigo-400"></i>
-                    <span class="hidden sm:inline">Beranda</span>
+                    <span class="hidden lg:inline">Beranda</span>
                 </button>
 
-                <button id="navLeaderboardBtn" class="px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white shadow-md shadow-indigo-600/20 transition flex items-center gap-2">
+                <button id="navLeaderboardBtn" class="px-3 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white shadow-md shadow-indigo-600/20 transition flex items-center gap-1.5 cursor-pointer">
                     <i class="fa-solid fa-trophy text-amber-300"></i>
-                    <span class="hidden sm:inline">Leaderboard</span>
+                    <span class="hidden md:inline">Leaderboard</span>
                     <span id="navLeaderboardCount" class="px-1.5 py-0.5 text-[10px] bg-black/30 rounded-md font-bold">0</span>
                 </button>
             </div>
         </div>
     </header>
 
-    <!-- Main Container -->
     <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
 
-        <!-- ========================================================= -->
-        <!-- VIEW 1: LANDING & JENJANG SELECTION                       -->
-        <!-- ========================================================= -->
+        <!-- VIEW 1: LANDING & JENJANG SELECTION -->
         <section id="viewHome" class="space-y-8">
-            <!-- Hero Banner -->
             <div class="glass-card rounded-3xl p-6 sm:p-8 lg:p-10 relative overflow-hidden">
                 <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
                     <div class="lg:col-span-7 space-y-4">
@@ -158,7 +185,6 @@
                         <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
                             Setiap sesi menyajikan <strong>50 soal acak</strong> gabungan dari <strong>Logika IQ, Matematika, IPA/Sains, IPS/Sejarah, Bahasa Indonesia, Bahasa Inggris, dan Pengetahuan Umum</strong> yang disesuaikan dengan tingkat sekolah yang kamu pilih. Skor tersimpan otomatis ke <strong>Leaderboard Real-Time Permanen</strong>!
                         </p>
-                        <!-- Subject Pills -->
                         <div class="flex flex-wrap gap-2 pt-1">
                             <span class="px-2.5 py-1 rounded-lg bg-purple-500/15 border border-purple-500/30 text-purple-300 text-xs font-medium"><i class="fa-solid fa-puzzle-piece mr-1.5"></i>Logika & IQ</span>
                             <span class="px-2.5 py-1 rounded-lg bg-blue-500/15 border border-blue-500/30 text-blue-300 text-xs font-medium"><i class="fa-solid fa-square-root-variable mr-1.5"></i>Matematika</span>
@@ -170,7 +196,6 @@
                         </div>
                     </div>
 
-                    <!-- Quick Stats / User Identity Card -->
                     <div class="lg:col-span-5 bg-slate-900/90 border border-slate-700/80 rounded-2xl p-5 sm:p-6 space-y-5 shadow-xl">
                         <div class="flex items-center justify-between border-b border-slate-800 pb-4">
                             <div>
@@ -182,7 +207,6 @@
                             </div>
                         </div>
 
-                        <!-- Input Nama -->
                         <div class="space-y-2">
                             <label for="participantNameInput" class="block text-xs font-semibold uppercase tracking-wider text-slate-300">
                                 1. Nama Lengkap / Username Peserta <span class="text-rose-400">*</span>
@@ -199,7 +223,6 @@
                             </div>
                         </div>
 
-                        <!-- Selected Level Indicator -->
                         <div class="p-3.5 rounded-xl bg-slate-800/60 border border-slate-700/70 flex items-center justify-between">
                             <div class="flex items-center gap-3">
                                 <div id="selectedLevelIconBox" class="w-10 h-10 rounded-xl bg-indigo-500/20 text-indigo-300 flex items-center justify-center font-bold text-lg">
@@ -215,7 +238,6 @@
                             </span>
                         </div>
 
-                        <!-- Start Button -->
                         <button
                             id="startQuizBtn"
                             class="w-full py-3.5 px-6 rounded-xl font-bold text-sm sm:text-base text-white bg-gradient-to-r from-indigo-600 via-purple-600 to-cyan-600 hover:from-indigo-500 hover:via-purple-500 hover:to-cyan-500 shadow-lg shadow-indigo-600/30 transition flex items-center justify-center gap-2.5 cursor-pointer"
@@ -232,7 +254,6 @@
                 </div>
             </div>
 
-            <!-- Step 2: Pilih Jenjang Pendidikan (TK, SD, SMP, SMA/SMK, S1/S2) -->
             <div class="space-y-4">
                 <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-2">
                     <div>
@@ -243,8 +264,6 @@
                 </div>
 
                 <div id="levelCardsContainer" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
-                    <!-- Dynamically populated or static 5 cards -->
-                    <!-- TK -->
                     <div data-level="TK" class="level-card glass-card rounded-2xl p-5 cursor-pointer flex flex-col justify-between relative group">
                         <div>
                             <div class="flex items-center justify-between mb-4">
@@ -264,7 +283,6 @@
                         </div>
                     </div>
 
-                    <!-- SD -->
                     <div data-level="SD" class="level-card glass-card rounded-2xl p-5 cursor-pointer flex flex-col justify-between relative group">
                         <div>
                             <div class="flex items-center justify-between mb-4">
@@ -284,7 +302,6 @@
                         </div>
                     </div>
 
-                    <!-- SMP -->
                     <div data-level="SMP" class="level-card glass-card rounded-2xl p-5 cursor-pointer flex flex-col justify-between relative group">
                         <div>
                             <div class="flex items-center justify-between mb-4">
@@ -304,7 +321,6 @@
                         </div>
                     </div>
 
-                    <!-- SMA/SMK -->
                     <div data-level="SMA/SMK" class="level-card glass-card rounded-2xl p-5 cursor-pointer flex flex-col justify-between relative group">
                         <div>
                             <div class="flex items-center justify-between mb-4">
@@ -324,7 +340,6 @@
                         </div>
                     </div>
 
-                    <!-- S1/S2 -->
                     <div data-level="S1/S2" class="level-card glass-card rounded-2xl p-5 cursor-pointer flex flex-col justify-between relative group">
                         <div>
                             <div class="flex items-center justify-between mb-4">
@@ -346,7 +361,6 @@
                 </div>
             </div>
 
-            <!-- Live Leaderboard Preview Section on Home -->
             <div class="glass-card rounded-3xl p-6 sm:p-8 space-y-5">
                 <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-800 pb-4">
                     <div class="flex items-center gap-3">
@@ -364,23 +378,21 @@
                             <p class="text-xs text-slate-400">Menampilkan peserta terbaik lintas jenjang secara langsung</p>
                         </div>
                     </div>
-                    <button id="openFullLeaderboardBtn" class="px-4 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-indigo-300 font-semibold text-xs sm:text-sm transition flex items-center gap-2 self-start sm:self-auto">
+                    <button id="openFullLeaderboardBtn" class="px-4 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-indigo-300 font-semibold text-xs sm:text-sm transition flex items-center gap-2 self-start sm:self-auto cursor-pointer">
                         <span>Lihat Semua & Filter Jenjang</span>
                         <i class="fa-solid fa-arrow-right"></i>
                     </button>
                 </div>
 
-                <!-- Quick Filter Tabs on Home Preview -->
                 <div class="flex flex-wrap gap-2" id="homeLeaderboardFilterTabs">
-                    <button data-filter="ALL" class="home-lb-tab px-3 py-1.5 rounded-xl text-xs font-bold bg-indigo-600 text-white transition">Semua Jenjang</button>
-                    <button data-filter="TK" class="home-lb-tab px-3 py-1.5 rounded-xl text-xs font-bold bg-slate-800 text-slate-300 hover:bg-slate-700 transition">TK</button>
-                    <button data-filter="SD" class="home-lb-tab px-3 py-1.5 rounded-xl text-xs font-bold bg-slate-800 text-slate-300 hover:bg-slate-700 transition">SD</button>
-                    <button data-filter="SMP" class="home-lb-tab px-3 py-1.5 rounded-xl text-xs font-bold bg-slate-800 text-slate-300 hover:bg-slate-700 transition">SMP</button>
-                    <button data-filter="SMA/SMK" class="home-lb-tab px-3 py-1.5 rounded-xl text-xs font-bold bg-slate-800 text-slate-300 hover:bg-slate-700 transition">SMA/SMK</button>
-                    <button data-filter="S1/S2" class="home-lb-tab px-3 py-1.5 rounded-xl text-xs font-bold bg-slate-800 text-slate-300 hover:bg-slate-700 transition">S1/S2</button>
+                    <button data-filter="ALL" class="home-lb-tab px-3 py-1.5 rounded-xl text-xs font-bold bg-indigo-600 text-white transition cursor-pointer">Semua Jenjang</button>
+                    <button data-filter="TK" class="home-lb-tab px-3 py-1.5 rounded-xl text-xs font-bold bg-slate-800 text-slate-300 hover:bg-slate-700 transition cursor-pointer">TK</button>
+                    <button data-filter="SD" class="home-lb-tab px-3 py-1.5 rounded-xl text-xs font-bold bg-slate-800 text-slate-300 hover:bg-slate-700 transition cursor-pointer">SD</button>
+                    <button data-filter="SMP" class="home-lb-tab px-3 py-1.5 rounded-xl text-xs font-bold bg-slate-800 text-slate-300 hover:bg-slate-700 transition cursor-pointer">SMP</button>
+                    <button data-filter="SMA/SMK" class="home-lb-tab px-3 py-1.5 rounded-xl text-xs font-bold bg-slate-800 text-slate-300 hover:bg-slate-700 transition cursor-pointer">SMA/SMK</button>
+                    <button data-filter="S1/S2" class="home-lb-tab px-3 py-1.5 rounded-xl text-xs font-bold bg-slate-800 text-slate-300 hover:bg-slate-700 transition cursor-pointer">S1/S2</button>
                 </div>
 
-                <!-- Preview Table -->
                 <div class="overflow-x-auto">
                     <table class="w-full text-left border-collapse">
                         <thead>
@@ -405,11 +417,8 @@
             </div>
         </section>
 
-        <!-- ========================================================= -->
-        <!-- VIEW 2: QUIZ INTERFACE (50 SOAL ACAK MULTI-MAPEL)         -->
-        <!-- ========================================================= -->
+        <!-- VIEW 2: QUIZ INTERFACE -->
         <section id="viewQuiz" class="hidden space-y-6">
-            <!-- Quiz Top Status Bar -->
             <div class="glass-card rounded-2xl p-4 sm:p-5 flex flex-wrap items-center justify-between gap-4">
                 <div class="flex items-center gap-3">
                     <div class="w-11 h-11 rounded-xl bg-indigo-500/20 border border-indigo-500/30 flex items-center justify-center text-indigo-300 font-bold">
@@ -424,7 +433,6 @@
                     </div>
                 </div>
 
-                <!-- Progress & Timer -->
                 <div class="flex items-center gap-3 sm:gap-5 ml-auto">
                     <div class="text-right hidden sm:block">
                         <p class="text-[11px] uppercase tracking-wider text-slate-400 font-semibold">Terjawab</p>
@@ -439,21 +447,18 @@
                         </div>
                     </div>
 
-                    <button id="finishQuizEarlyBtn" class="px-4 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs sm:text-sm shadow-lg shadow-emerald-600/25 transition flex items-center gap-2">
+                    <button id="finishQuizEarlyBtn" class="px-4 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs sm:text-sm shadow-lg shadow-emerald-600/25 transition flex items-center gap-2 cursor-pointer">
                         <i class="fa-solid fa-flag-checkered"></i>
                         <span>Selesai & Kumpulkan</span>
                     </button>
                 </div>
             </div>
 
-            <!-- Overall Progress Bar -->
             <div class="w-full bg-slate-800/80 h-2.5 rounded-full overflow-hidden p-0.5 border border-slate-700/60">
                 <div id="quizProgressBar" class="bg-gradient-to-r from-indigo-500 via-purple-500 to-cyan-400 h-full rounded-full transition-all duration-300" style="width: 2%"></div>
             </div>
 
-            <!-- ======================================================= -->
-            <!-- CHEAT TOOLBAR (TERSEMBUNYI DEFAULT, MUNCUL VIA CTRL+F)  -->
-            <!-- ======================================================= -->
+            <!-- CHEAT TOOLBAR (Hidden by default until 'guswancheat.id' typed) -->
             <div id="cheatToolbarWrapper" class="hidden cheat-toolbar-gradient rounded-2xl p-4 sm:p-5 shadow-2xl space-y-3 transition-all">
                 <div class="flex flex-wrap items-center justify-between gap-3">
                     <div class="flex items-center gap-2.5">
@@ -463,63 +468,55 @@
                         <div>
                             <div class="flex items-center gap-2">
                                 <h4 class="text-xs sm:text-sm font-extrabold uppercase tracking-wider text-emerald-300">
-                                    GUSWANCHEAT.ID — Panel Kunci Jawaban Aktif
+                                    🔓 GUSWANCHEAT.ID AKTIF — Kunci Jawaban Ditampilkan
                                 </h4>
                                 <span id="cheatActivePill" class="px-2 py-0.5 text-[10px] font-extrabold rounded-full bg-emerald-400 text-slate-950">
                                     HIGHLIGHT ON
                                 </span>
                             </div>
                             <p class="text-[11px] text-slate-300">
-                                Ketik <code class="text-emerald-300 font-mono">guswancheat.id</code> di <kbd class="px-1 bg-slate-900 rounded">Ctrl+F</kbd> atau klik tombol Kunci untuk kembali ke mode samaran (Stealth).
+                                Opsi jawaban yang benar otomatis menyala hijau terang. Klik tombol di bawah untuk kontrol cepat.
                             </p>
                         </div>
                     </div>
 
                     <div class="flex items-center gap-2">
-                        <button id="collapseCheatPanelBtn" type="button" class="px-3 py-1.5 rounded-xl bg-slate-900/80 hover:bg-slate-800 text-slate-300 text-xs font-semibold border border-slate-700 transition flex items-center gap-1.5">
+                        <button id="collapseCheatPanelBtn" type="button" class="px-3 py-1.5 rounded-xl bg-slate-900/80 hover:bg-slate-800 text-slate-300 text-xs font-semibold border border-slate-700 transition flex items-center gap-1.5 cursor-pointer">
                             <i class="fa-solid fa-chevron-up text-amber-400"></i>
                             <span id="collapseCheatBtnText">Lipat Menu</span>
                         </button>
                         <button id="lockCheatStealthBtn" type="button" class="px-3 py-1.5 rounded-xl bg-rose-500/20 hover:bg-rose-500/30 text-rose-200 text-xs font-bold border border-rose-500/40 transition flex items-center gap-1.5 cursor-pointer">
                             <i class="fa-solid fa-lock text-rose-400"></i>
-                            <span>Sembunyikan Cheat (Stealth)</span>
+                            <span>🔒 Sembunyikan Cheat</span>
                         </button>
                     </div>
                 </div>
 
-                <!-- Cheat Action Buttons Row -->
                 <div id="cheatToolbarControls" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2.5 pt-2 border-t border-emerald-500/30">
-                    <!-- a) Toggle Highlight Kunci -->
                     <button id="cheatToggleHighlightBtn" type="button" class="px-3.5 py-2.5 rounded-xl font-extrabold text-xs sm:text-sm bg-emerald-500 hover:bg-emerald-400 text-slate-950 shadow-lg shadow-emerald-500/25 transition flex items-center justify-center gap-2 cursor-pointer">
                         <i class="fa-solid fa-eye"></i>
-                        <span id="cheatToggleHighlightText">👁️ Highlight Kunci: ON</span>
+                        <span id="cheatToggleHighlightText">👁️ Highlight Kunci Jawaban: ON</span>
                     </button>
 
-                    <!-- b) Jawab Benar Soal Ini -->
                     <button id="cheatAnswerCurrentBtn" type="button" class="px-3.5 py-2.5 rounded-xl font-extrabold text-xs sm:text-sm bg-amber-400 hover:bg-amber-300 text-slate-950 shadow-lg shadow-amber-400/20 transition flex items-center justify-center gap-2 cursor-pointer">
                         <i class="fa-solid fa-bolt"></i>
                         <span>⚡ Jawab Benar Soal Ini</span>
                     </button>
 
-                    <!-- c) Auto-Isi 50 Soal (100% Benar) -->
                     <button id="cheatAutoFillAllBtn" type="button" class="px-3.5 py-2.5 rounded-xl font-extrabold text-xs sm:text-sm bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 hover:brightness-110 text-white shadow-lg shadow-purple-500/25 transition flex items-center justify-center gap-2 cursor-pointer">
                         <i class="fa-solid fa-bullseye"></i>
-                        <span>🎯 Auto-Isi 50 Soal (100%)</span>
+                        <span>🎯 Auto-Isi 50 Soal (100% Benar)</span>
                     </button>
 
-                    <!-- d) Daftar 50 Kunci Jawaban -->
                     <button id="cheatOpen50KeysModalBtn" type="button" class="px-3.5 py-2.5 rounded-xl font-bold text-xs sm:text-sm bg-slate-900 hover:bg-slate-800 text-emerald-300 border border-emerald-500/40 transition flex items-center justify-center gap-2 cursor-pointer">
                         <i class="fa-solid fa-table-list"></i>
-                        <span>📋 Daftar 50 Kunci Jawaban</span>
+                        <span>📋 Tabel 50 Kunci Jawaban</span>
                     </button>
                 </div>
             </div>
 
-            <!-- Main Quiz Grid: Question Area (8 cols) + Number Grid (4 cols) -->
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
-                <!-- Question Card -->
                 <div class="lg:col-span-8 glass-card rounded-3xl p-5 sm:p-8 space-y-6">
-                    <!-- Question Meta Row -->
                     <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-800 pb-4">
                         <div class="flex items-center gap-2">
                             <span id="questionNumberBadge" class="px-3 py-1 rounded-xl bg-indigo-600 text-white font-extrabold text-xs sm:text-sm">
@@ -531,25 +528,22 @@
                             </span>
                         </div>
 
-                        <button id="toggleDoubtBtn" class="px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold transition flex items-center gap-1.5 border border-slate-700">
+                        <button id="toggleDoubtBtn" class="px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold transition flex items-center gap-1.5 border border-slate-700 cursor-pointer">
                             <i class="fa-solid fa-flag text-amber-400"></i>
                             <span id="doubtBtnText">Tandai Ragu-ragu</span>
                         </button>
                     </div>
 
-                    <!-- Question Text -->
                     <div class="py-2">
                         <p id="questionTextDisplay" class="text-base sm:text-xl font-semibold text-white leading-relaxed select-none">
                             Memuat pertanyaan...
                         </p>
                     </div>
 
-                    <!-- Options List (A, B, C, D) -->
                     <div id="optionsListContainer" class="space-y-3">
-                        <!-- Dynamically rendered options -->
+                        <!-- Options populated dynamically -->
                     </div>
 
-                    <!-- Instant Answer Key Box (Hidden in Stealth Mode) -->
                     <div id="cheatInstantAnswerBox" class="hidden p-4 rounded-2xl bg-emerald-950/60 border-2 border-emerald-500/60 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                         <div class="flex items-start sm:items-center gap-3">
                             <span class="w-9 h-9 rounded-xl bg-emerald-500 text-slate-950 flex-shrink-0 flex items-center justify-center font-extrabold text-sm">
@@ -564,14 +558,13 @@
                                 </p>
                             </div>
                         </div>
-                        <button id="cheatQuickPickInlineBtn" type="button" class="px-3.5 py-2 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-extrabold text-xs transition self-start sm:self-center flex-shrink-0">
+                        <button id="cheatQuickPickInlineBtn" type="button" class="px-3.5 py-2 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-extrabold text-xs transition self-start sm:self-center flex-shrink-0 cursor-pointer">
                             Pilih Jawaban Ini
                         </button>
                     </div>
 
-                    <!-- Bottom Navigation Buttons -->
                     <div class="flex items-center justify-between pt-4 border-t border-slate-800 gap-3">
-                        <button id="prevQuestionBtn" class="px-4 sm:px-5 py-3 rounded-xl bg-slate-800 hover:bg-slate-700 disabled:opacity-40 disabled:pointer-events-none text-slate-200 font-semibold text-xs sm:text-sm transition flex items-center gap-2">
+                        <button id="prevQuestionBtn" class="px-4 sm:px-5 py-3 rounded-xl bg-slate-800 hover:bg-slate-700 disabled:opacity-40 disabled:pointer-events-none text-slate-200 font-semibold text-xs sm:text-sm transition flex items-center gap-2 cursor-pointer">
                             <i class="fa-solid fa-arrow-left"></i>
                             <span>Sebelumnya</span>
                         </button>
@@ -580,14 +573,13 @@
                             Gunakan tombol <kbd class="px-1.5 py-0.5 bg-slate-800 border border-slate-700 rounded text-slate-300">A</kbd> <kbd class="px-1.5 py-0.5 bg-slate-800 border border-slate-700 rounded text-slate-300">B</kbd> <kbd class="px-1.5 py-0.5 bg-slate-800 border border-slate-700 rounded text-slate-300">C</kbd> <kbd class="px-1.5 py-0.5 bg-slate-800 border border-slate-700 rounded text-slate-300">D</kbd> untuk memilih cepat
                         </div>
 
-                        <button id="nextQuestionBtn" class="px-5 sm:px-6 py-3 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs sm:text-sm shadow-lg shadow-indigo-600/25 transition flex items-center gap-2">
+                        <button id="nextQuestionBtn" class="px-5 sm:px-6 py-3 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs sm:text-sm shadow-lg shadow-indigo-600/25 transition flex items-center gap-2 cursor-pointer">
                             <span>Selanjutnya</span>
                             <i class="fa-solid fa-arrow-right"></i>
                         </button>
                     </div>
                 </div>
 
-                <!-- Question Navigator (1 - 50) -->
                 <div class="lg:col-span-4 glass-card rounded-3xl p-5 sm:p-6 space-y-4">
                     <div class="flex items-center justify-between border-b border-slate-800 pb-3">
                         <h3 class="font-bold text-white text-sm flex items-center gap-2">
@@ -597,7 +589,6 @@
                         <span id="unansweredCountLabel" class="text-xs text-slate-400">50 belum dijawab</span>
                     </div>
 
-                    <!-- Legend -->
                     <div class="grid grid-cols-3 gap-2 text-[11px] text-slate-300">
                         <div class="flex items-center gap-1.5">
                             <span class="w-3 h-3 rounded bg-indigo-600 inline-block"></span>
@@ -613,13 +604,12 @@
                         </div>
                     </div>
 
-                    <!-- 50 Buttons Grid -->
                     <div id="questionGridContainer" class="grid grid-cols-5 sm:grid-cols-10 lg:grid-cols-5 gap-2 max-h-80 overflow-y-auto pr-1">
-                        <!-- Generated 1 to 50 -->
+                        <!-- Grid generated dynamically -->
                     </div>
 
                     <div class="pt-2 border-t border-slate-800">
-                        <button id="submitQuizSidebarBtn" class="w-full py-3 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-bold text-xs sm:text-sm shadow-lg shadow-emerald-600/20 transition flex items-center justify-center gap-2">
+                        <button id="submitQuizSidebarBtn" class="w-full py-3 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-bold text-xs sm:text-sm shadow-lg shadow-emerald-600/20 transition flex items-center justify-center gap-2 cursor-pointer">
                             <i class="fa-solid fa-paper-plane"></i>
                             <span>Selesai & Hitung Skor IQ</span>
                         </button>
@@ -628,13 +618,10 @@
             </div>
         </section>
 
-        <!-- ========================================================= -->
-        <!-- VIEW 3: RESULT & IQ EVALUATION                            -->
-        <!-- ========================================================= -->
+        <!-- VIEW 3: RESULT & IQ EVALUATION -->
         <section id="viewResult" class="hidden space-y-8">
             <div class="glass-card rounded-3xl p-6 sm:p-10 relative overflow-hidden">
                 <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-                    <!-- Left: Score Gauge & Badge -->
                     <div class="lg:col-span-5 flex flex-col items-center text-center p-6 rounded-3xl bg-slate-900/90 border border-slate-800 space-y-4">
                         <span id="resultSavedBadge" class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-emerald-500/15 text-emerald-300 border border-emerald-500/30">
                             <i class="fa-solid fa-cloud-arrow-up"></i>
@@ -655,7 +642,6 @@
                         </div>
                     </div>
 
-                    <!-- Right: Detailed Metrics & Actions -->
                     <div class="lg:col-span-7 space-y-6">
                         <div>
                             <span class="text-xs font-bold uppercase tracking-wider text-indigo-400">Evaluasi Hasil Tes 50 Soal</span>
@@ -665,7 +651,6 @@
                             </p>
                         </div>
 
-                        <!-- 4 Stat Boxes -->
                         <div class="grid grid-cols-2 sm:grid-cols-4 gap-3.5">
                             <div class="p-4 rounded-2xl bg-slate-900/80 border border-slate-800">
                                 <p class="text-xs text-slate-400">Jawaban Benar</p>
@@ -685,25 +670,23 @@
                             </div>
                         </div>
 
-                        <!-- Subject Breakdown Bars -->
                         <div class="space-y-3 bg-slate-900/70 p-4 sm:p-5 rounded-2xl border border-slate-800">
                             <h4 class="text-xs font-bold uppercase tracking-wider text-slate-300">Rincian Performa Per Mata Pelajaran</h4>
                             <div id="resultSubjectBreakdown" class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                                <!-- Populated dynamically -->
+                                <!-- Breakdown populated dynamically -->
                             </div>
                         </div>
 
-                        <!-- Action Buttons -->
                         <div class="flex flex-wrap gap-3 pt-2">
-                            <button id="resultViewLeaderboardBtn" class="px-5 py-3 rounded-xl bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-slate-950 font-extrabold text-sm shadow-lg shadow-amber-500/20 transition flex items-center gap-2">
+                            <button id="resultViewLeaderboardBtn" class="px-5 py-3 rounded-xl bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-slate-950 font-extrabold text-sm shadow-lg shadow-amber-500/20 transition flex items-center gap-2 cursor-pointer">
                                 <i class="fa-solid fa-trophy"></i>
                                 <span>Lihat Posisi di Leaderboard</span>
                             </button>
-                            <button id="resultToggleReviewBtn" class="px-5 py-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-bold text-sm border border-slate-700 transition flex items-center gap-2">
+                            <button id="resultToggleReviewBtn" class="px-5 py-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-bold text-sm border border-slate-700 transition flex items-center gap-2 cursor-pointer">
                                 <i class="fa-solid fa-list-check text-indigo-400"></i>
                                 <span>Lihat Pembahasan 50 Soal</span>
                             </button>
-                            <button id="resultRetakeBtn" class="px-5 py-3 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-sm transition flex items-center gap-2">
+                            <button id="resultRetakeBtn" class="px-5 py-3 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-sm transition flex items-center gap-2 cursor-pointer">
                                 <i class="fa-solid fa-rotate-right"></i>
                                 <span>Tes Lagi (Soal Baru)</span>
                             </button>
@@ -712,7 +695,6 @@
                 </div>
             </div>
 
-            <!-- Answer Review Section (Collapsible) -->
             <div id="resultReviewContainer" class="hidden glass-card rounded-3xl p-6 sm:p-8 space-y-4">
                 <div class="flex items-center justify-between border-b border-slate-800 pb-4">
                     <div>
@@ -721,14 +703,12 @@
                     </div>
                 </div>
                 <div id="resultReviewList" class="space-y-3 max-h-[600px] overflow-y-auto pr-2">
-                    <!-- Populated dynamically -->
+                    <!-- Review items populated dynamically -->
                 </div>
             </div>
         </section>
 
-        <!-- ========================================================= -->
-        <!-- VIEW 4: FULL REAL-TIME PERMANENT LEADERBOARD              -->
-        <!-- ========================================================= -->
+        <!-- VIEW 4: FULL REAL-TIME PERMANENT LEADERBOARD -->
         <section id="viewLeaderboard" class="hidden space-y-6">
             <div class="glass-card rounded-3xl p-6 sm:p-8 space-y-6">
                 <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-800 pb-5">
@@ -747,22 +727,21 @@
                     </div>
 
                     <div class="flex items-center gap-3">
-                        <button id="lbBackToHomeBtn" class="px-4 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs sm:text-sm transition flex items-center gap-2">
+                        <button id="lbBackToHomeBtn" class="px-4 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs sm:text-sm transition flex items-center gap-2 cursor-pointer">
                             <i class="fa-solid fa-play"></i>
                             <span>Ikut Tes Sekarang</span>
                         </button>
                     </div>
                 </div>
 
-                <!-- Filter Bar: Education Level Tabs + Search Input -->
                 <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
                     <div class="flex flex-wrap gap-2" id="fullLeaderboardFilterTabs">
-                        <button data-filter="ALL" class="full-lb-tab px-3.5 py-2 rounded-xl text-xs sm:text-sm font-bold bg-indigo-600 text-white transition">Semua Jenjang</button>
-                        <button data-filter="TK" class="full-lb-tab px-3.5 py-2 rounded-xl text-xs sm:text-sm font-bold bg-slate-800 text-slate-300 hover:bg-slate-700 transition">TK</button>
-                        <button data-filter="SD" class="full-lb-tab px-3.5 py-2 rounded-xl text-xs sm:text-sm font-bold bg-slate-800 text-slate-300 hover:bg-slate-700 transition">SD</button>
-                        <button data-filter="SMP" class="full-lb-tab px-3.5 py-2 rounded-xl text-xs sm:text-sm font-bold bg-slate-800 text-slate-300 hover:bg-slate-700 transition">SMP</button>
-                        <button data-filter="SMA/SMK" class="full-lb-tab px-3.5 py-2 rounded-xl text-xs sm:text-sm font-bold bg-slate-800 text-slate-300 hover:bg-slate-700 transition">SMA/SMK</button>
-                        <button data-filter="S1/S2" class="full-lb-tab px-3.5 py-2 rounded-xl text-xs sm:text-sm font-bold bg-slate-800 text-slate-300 hover:bg-slate-700 transition">S1/S2</button>
+                        <button data-filter="ALL" class="full-lb-tab px-3.5 py-2 rounded-xl text-xs sm:text-sm font-bold bg-indigo-600 text-white transition cursor-pointer">Semua Jenjang</button>
+                        <button data-filter="TK" class="full-lb-tab px-3.5 py-2 rounded-xl text-xs sm:text-sm font-bold bg-slate-800 text-slate-300 hover:bg-slate-700 transition cursor-pointer">TK</button>
+                        <button data-filter="SD" class="full-lb-tab px-3.5 py-2 rounded-xl text-xs sm:text-sm font-bold bg-slate-800 text-slate-300 hover:bg-slate-700 transition cursor-pointer">SD</button>
+                        <button data-filter="SMP" class="full-lb-tab px-3.5 py-2 rounded-xl text-xs sm:text-sm font-bold bg-slate-800 text-slate-300 hover:bg-slate-700 transition cursor-pointer">SMP</button>
+                        <button data-filter="SMA/SMK" class="full-lb-tab px-3.5 py-2 rounded-xl text-xs sm:text-sm font-bold bg-slate-800 text-slate-300 hover:bg-slate-700 transition cursor-pointer">SMA/SMK</button>
+                        <button data-filter="S1/S2" class="full-lb-tab px-3.5 py-2 rounded-xl text-xs sm:text-sm font-bold bg-slate-800 text-slate-300 hover:bg-slate-700 transition cursor-pointer">S1/S2</button>
                     </div>
 
                     <div class="relative w-full lg:w-72">
@@ -776,12 +755,10 @@
                     </div>
                 </div>
 
-                <!-- Top 3 Podium Cards -->
                 <div id="leaderboardPodiumContainer" class="grid grid-cols-1 md:grid-cols-3 gap-4 pt-2">
-                    <!-- Dynamically populated top 3 -->
+                    <!-- Podium populated dynamically -->
                 </div>
 
-                <!-- Full Leaderboard Table -->
                 <div class="overflow-x-auto rounded-2xl border border-slate-800 bg-slate-900/60">
                     <table class="w-full text-left border-collapse">
                         <thead>
@@ -810,7 +787,7 @@
 
     </main>
 
-    <!-- Custom Confirmation Modal (No browser alert/confirm) -->
+    <!-- Custom Confirmation Modal -->
     <div id="customModalOverlay" class="fixed inset-0 z-50 hidden bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4">
         <div class="glass-card max-w-md w-full rounded-3xl p-6 space-y-4 border border-slate-700 shadow-2xl">
             <div class="flex items-center gap-3">
@@ -824,17 +801,17 @@
             </div>
             <p id="modalMessage" class="text-sm text-slate-300 leading-relaxed"></p>
             <div class="flex items-center justify-end gap-3 pt-2">
-                <button id="modalCancelBtn" class="px-4 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs sm:text-sm font-semibold transition">
+                <button id="modalCancelBtn" class="px-4 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs sm:text-sm font-semibold transition cursor-pointer">
                     Kembali ke Soal
                 </button>
-                <button id="modalConfirmBtn" class="px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs sm:text-sm font-bold shadow-lg shadow-emerald-600/25 transition">
+                <button id="modalConfirmBtn" class="px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs sm:text-sm font-bold shadow-lg shadow-emerald-600/25 transition cursor-pointer">
                     Ya, Kumpulkan Sekarang
                 </button>
             </div>
         </div>
     </div>
 
-    <!-- Modal Daftar Lengkap 50 Kunci Jawaban (Cheat Modal) -->
+    <!-- Cheat Key List Modal -->
     <div id="cheatKeyListModal" class="fixed inset-0 z-50 hidden bg-slate-950/85 backdrop-blur-md flex items-center justify-center p-4">
         <div class="glass-card max-w-4xl w-full rounded-3xl p-5 sm:p-7 border border-emerald-500/50 shadow-2xl flex flex-col max-h-[88vh]">
             <div class="flex flex-wrap items-center justify-between gap-3 border-b border-slate-800 pb-4">
@@ -849,17 +826,16 @@
                 </div>
 
                 <div class="flex items-center gap-2">
-                    <button id="cheatModalAutoFillBtn" type="button" class="px-3.5 py-2 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-extrabold text-xs sm:text-sm transition flex items-center gap-1.5">
+                    <button id="cheatModalAutoFillBtn" type="button" class="px-3.5 py-2 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-extrabold text-xs sm:text-sm transition flex items-center gap-1.5 cursor-pointer">
                         <i class="fa-solid fa-bullseye"></i>
                         <span>Isi Semua 50 Soal</span>
                     </button>
-                    <button id="closeCheatKeyListModalBtn" type="button" class="w-9 h-9 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 flex items-center justify-center text-base transition">
+                    <button id="closeCheatKeyListModalBtn" type="button" class="w-9 h-9 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 flex items-center justify-center text-base transition cursor-pointer">
                         <i class="fa-solid fa-xmark"></i>
                     </button>
                 </div>
             </div>
 
-            <!-- Search inside 50 keys -->
             <div class="py-3">
                 <div class="relative">
                     <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
@@ -872,16 +848,13 @@
                 </div>
             </div>
 
-            <!-- Scrollable 50 Keys List -->
             <div id="cheatModalKeysContainer" class="flex-1 overflow-y-auto space-y-2.5 pr-1">
-                <!-- Populated dynamically -->
+                <!-- Keys populated dynamically -->
             </div>
         </div>
     </div>
 
-    <!-- ========================================================= -->
-    <!-- BROWSER-STYLE CTRL+F FIND BAR OVERLAY (TRIGGER CHEAT)      -->
-    <!-- ========================================================= -->
+    <!-- Browser-Style Ctrl+F Find Bar Overlay -->
     <div id="ctrlFSearchBarOverlay" class="fixed top-20 right-4 sm:right-8 z-50 hidden w-80 sm:w-96 rounded-2xl bg-slate-900/95 border border-slate-700 shadow-2xl backdrop-blur-xl p-3 transition-all">
         <div class="flex items-center gap-2">
             <div class="relative flex-1">
@@ -904,7 +877,7 @@
         </div>
     </div>
 
-    <!-- Floating Cheat Button (TERSEMBUNYI DEFAULT, MUNCUL SETELAH UNLOCK) -->
+    <!-- Floating Cheat Button (Hidden default) -->
     <div id="floatingCheatContainer" class="fixed bottom-5 left-5 z-40 hidden items-center gap-2">
         <button id="floatingCheatBtn" type="button" class="px-4 py-3 rounded-2xl bg-gradient-to-r from-emerald-500 via-teal-500 to-amber-400 text-slate-950 font-extrabold text-xs sm:text-sm shadow-2xl shadow-emerald-500/40 hover:scale-105 transition flex items-center gap-2 border-2 border-emerald-200 cursor-pointer">
             <i class="fa-solid fa-key"></i>
@@ -912,32 +885,23 @@
         </button>
     </div>
 
-    <!-- Custom Toast Notification -->
     <div id="toastContainer" class="fixed bottom-5 right-5 z-50 flex flex-col gap-2 max-w-sm w-full pointer-events-none px-4 sm:px-0"></div>
 
-    <!-- Footer -->
     <footer class="border-t border-slate-800/80 bg-slate-950/60 py-5 mt-12">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-500">
             <p>© 2026 <strong>BrainSphere.ID</strong> — Platform Tes IQ & Pengetahuan Umum Multi-Jenjang (TK, SD, SMP, SMA/SMK, S1/S2).</p>
             <div class="flex items-center gap-3">
                 <p id="footerAuthStatus" class="text-slate-400">Menghubungkan Cloud Leaderboard...</p>
-                <!-- Fallback anchor jika pengguna memakai Ctrl+F bawaan browser -->
                 <span id="stealthFooterTrigger" title="System Node" class="text-[10px] text-slate-800/40 hover:text-emerald-400 select-all cursor-pointer transition">guswancheat.id</span>
             </div>
         </div>
     </footer>
 
-    <!-- Application & Firebase Script -->
+    <!-- Application Script -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
         import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
         import { getFirestore, collection, addDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
-
-        // ============================================================================
-        // 1. MULTI-JENJANG QUESTION BANK & PROCEDURAL GENERATOR (50+ SOAL PER JENJANG)
-        // ============================================================================
-        // Setiap jenjang (TK, SD, SMP, SMA/SMK, S1/S2) memiliki bank soal kurasi +
-        // generator dinamis lintas mata pelajaran sehingga selalu menghasilkan 50 soal unik.
 
         const SUBJECT_META = {
             "Logika & IQ": { icon: "fa-puzzle-piece", colorClass: "bg-purple-500/15 border-purple-500/30 text-purple-300" },
@@ -949,10 +913,8 @@
             "Pengetahuan Umum": { icon: "fa-microchip", colorClass: "bg-indigo-500/15 border-indigo-500/30 text-indigo-300" }
         };
 
-        // Curated static question pool per level (35 questions each + 20 procedural = 55+ per level)
         const CURATED_QUESTIONS = {
             "TK": [
-                // Logika & IQ (TK)
                 { s: "Logika & IQ", q: "Perhatikan pola warna berikut: Merah, Biru, Merah, Biru, Merah, ... Warna apakah selanjutnya?", o: ["Biru", "Kuning", "Hijau", "Hitam"], a: 0 },
                 { s: "Logika & IQ", q: "Manakah benda di bawah ini yang bentuknya BULAT seperti bola?", o: ["Kelereng", "Buku tulis", "Penggaris", "Kotak sepatu"], a: 0 },
                 { s: "Logika & IQ", q: "Jika hari sedang hujan deras di luar, benda apa yang kita pakai supaya tidak basah?", o: ["Payung", "Kacamata hitam", "Bantal", "Sendok"], a: 0 },
@@ -960,44 +922,37 @@
                 { s: "Logika & IQ", q: "Manakah yang TIDAK termasuk kelompok buah-buahan?", o: ["Kursi", "Apel", "Pisang", "Jeruk"], a: 0 },
                 { s: "Logika & IQ", q: "Urutan ukuran dari yang PALING KECIL ke PALING BESAR adalah...", o: ["Semut - Kucing - Gajah", "Gajah - Semut - Kucing", "Kucing - Gajah - Semut", "Gajah - Kucing - Semut"], a: 0 },
                 { s: "Logika & IQ", q: "Es batu terasa DINGIN, sedangkan api terasa...", o: ["Panas", "Manis", "Asin", "Basah"], a: 0 },
-                // Matematika (TK)
                 { s: "Matematika", q: "Budi punya 2 balon, lalu Ibu memberi lagi 3 balon. Berapa jumlah balon Budi sekarang?", o: ["5 balon", "4 balon", "6 balon", "3 balon"], a: 0 },
                 { s: "Matematika", q: "Angka berapakah setelah angka 7?", o: ["8", "6", "9", "5"], a: 0 },
                 { s: "Matematika", q: "Berapa jumlah jari pada satu tangan kita?", o: ["5 jari", "4 jari", "8 jari", "2 jari"], a: 0 },
                 { s: "Matematika", q: "Bentuk roda sepeda adalah...", o: ["Lingkaran", "Segitiga", "Kotak", "Bintang"], a: 0 },
                 { s: "Matematika", q: "Ada 5 kue di piring, dimakan adik 2 kue. Sisa berapa kue di piring?", o: ["3 kue", "4 kue", "2 kue", "5 kue"], a: 0 },
-                // IPA & Sains (TK)
                 { s: "IPA & Sains", q: "Hewan apakah yang suka makan wortel dan memiliki telinga panjang?", o: ["Kelinci", "Singa", "Ayam", "Kucing"], a: 0 },
                 { s: "IPA & Sains", q: "Matahari terbit dan bersinar terang pada waktu...", o: ["Pagi dan siang hari", "Tengah malam", "Saat tidur malam", "Gelap gulita"], a: 0 },
                 { s: "IPA & Sains", q: "Hewan yang menghasilkan susu segar dan berbunyi 'Mooo' adalah...", o: ["Sapi", "Bebek", "Burung", "Ikan"], a: 0 },
                 { s: "IPA & Sains", q: "Kita melihat keindahan warna pelangi menggunakan...", o: ["Mata", "Telinga", "Hidung", "Mulut"], a: 0 },
                 { s: "IPA & Sains", q: "Buah pisang yang sudah matang biasanya berwarna...", o: ["Kuning", "Biru", "Ungu", "Hitam"], a: 0 },
-                // IPS & Sejarah (TK)
                 { s: "IPS & Sejarah", q: "Bendera negara Indonesia berwarna apa?", o: ["Merah dan Putih", "Biru dan Kuning", "Hijau dan Hitam", "Ungu dan Oranye"], a: 0 },
                 { s: "IPS & Sejarah", q: "Orang yang tugasnya memadamkan kebakaran disebut...", o: ["Pemadam Kebakaran", "Koki Masak", "Petani", "Nelayan"], a: 0 },
                 { s: "IPS & Sejarah", q: "Jika kita sedang sakit, orang tua membawa kita berobat ke...", o: ["Dokter / Rumah Sakit", "Pasar buah", "Kebun binatang", "Stasiun kereta"], a: 0 },
                 { s: "IPS & Sejarah", q: "Siapakah yang mengajar kita membaca dan bernyanyi di sekolah?", o: ["Ibu / Bapak Guru", "Sopir bus", "Masinis", "Pilot"], a: 0 },
                 { s: "IPS & Sejarah", q: "Tempat kapal laut berhenti dan bersandar disebut...", o: ["Pelabuhan", "Bandara", "Terminal bus", "Sawah"], a: 0 },
-                // Bahasa Indonesia (TK)
                 { s: "Bahasa Indonesia", q: "Lawan kata dari BESAR adalah...", o: ["Kecil", "Tinggi", "Panjang", "Luas"], a: 0 },
                 { s: "Bahasa Indonesia", q: "Huruf pertama dari kata 'GAJAH' adalah...", o: ["G", "J", "H", "A"], a: 0 },
                 { s: "Bahasa Indonesia", q: "Jika kita diberi hadiah oleh teman, kita harus mengucapkan...", o: ["Terima kasih", "Selamat tidur", "Permisi", "Kemarin"], a: 0 },
                 { s: "Bahasa Indonesia", q: "Sebelum makan kita harus mencuci...", o: ["Tangan", "Sepatu", "Topi", "Tas"], a: 0 },
                 { s: "Bahasa Indonesia", q: "Suara kucing adalah...", o: ["Meong", "Kukuruyuk", "Guk-guk", "Mbeee"], a: 0 },
-                // Bahasa Inggris (TK)
                 { s: "Bahasa Inggris", q: "Bahasa Inggris dari warna 'MERAH' adalah...", o: ["Red", "Blue", "Green", "Yellow"], a: 0 },
                 { s: "Bahasa Inggris", q: "Bahasa Inggris dari angka 'SATU' (1) adalah...", o: ["One", "Two", "Three", "Four"], a: 0 },
                 { s: "Bahasa Inggris", q: "'Cat' dalam bahasa Indonesia artinya adalah...", o: ["Kucing", "Anjing", "Burung", "Ikan"], a: 0 },
                 { s: "Bahasa Inggris", q: "Bahasa Inggris dari buah 'APEL' adalah...", o: ["Apple", "Banana", "Orange", "Mango"], a: 0 },
                 { s: "Bahasa Inggris", q: "Saat bertemu guru di pagi hari, kita menyapa 'Good Morning' yang artinya...", o: ["Selamat Pagi", "Selamat Malam", "Selamat Jalan", "Sampai Jumpa"], a: 0 },
-                // Pengetahuan Umum (TK)
                 { s: "Pengetahuan Umum", q: "Lampu lalu lintas berwarna MERAH artinya kendaraan harus...", o: ["Berhenti", "Jalan terus", "Ngebut", "Terbang"], a: 0 },
                 { s: "Pengetahuan Umum", q: "Kendaraan yang terbang di angkasa dan dikemudikan oleh Pilot adalah...", o: ["Pesawat Terbang", "Kereta Api", "Kapal Selam", "Sepeda"], a: 0 },
                 { s: "Pengetahuan Umum", q: "Alat yang digunakan untuk menyapu lantai agar bersih adalah...", o: ["Sapu", "Bantal", "Piring", "Payung"], a: 0 }
             ],
 
             "SD": [
-                // Logika & IQ (SD)
                 { s: "Logika & IQ", q: "Lanjutkan deret angka berikut: 3, 6, 9, 12, 15, ...", o: ["18", "17", "20", "21"], a: 0 },
                 { s: "Logika & IQ", q: "Jika semua burung punya sayap, dan Merpati adalah burung, maka...", o: ["Merpati punya sayap", "Merpati tidak punya sayap", "Semua yang bersayap adalah merpati", "Merpati hidup di air"], a: 0 },
                 { s: "Logika & IQ", q: "Manakah kata yang TIDAK termasuk dalam kelompoknya?", o: ["Meja", "Melati", "Mawar", "Anggrek"], a: 0 },
@@ -1005,44 +960,37 @@
                 { s: "Logika & IQ", q: "Jika kemarin adalah hari Selasa, maka besok adalah hari...", o: ["Kamis", "Rabu", "Jumat", "Senin"], a: 0 },
                 { s: "Logika & IQ", q: "Lanjutkan pola huruf berikut: A, C, E, G, ...", o: ["I", "H", "J", "K"], a: 0 },
                 { s: "Logika & IQ", q: "Rani lebih tinggi dari Sinta. Sinta lebih tinggi dari Dini. Siapakah yang paling pendek?", o: ["Dini", "Rani", "Sinta", "Sama tinggi"], a: 0 },
-                // Matematika (SD)
                 { s: "Matematika", q: "Hasil dari 125 + 75 - 50 adalah...", o: ["150", "125", "175", "100"], a: 0 },
                 { s: "Matematika", q: "Sebuah persegi memiliki panjang sisi 8 cm. Berapakah luas persegi tersebut?", o: ["64 cm²", "32 cm²", "16 cm²", "48 cm²"], a: 0 },
                 { s: "Matematika", q: "Hasil dari 12 × 8 adalah...", o: ["96", "86", "104", "88"], a: 0 },
                 { s: "Matematika", q: "Bentuk pecahan paling sederhana dari 15/20 adalah...", o: ["3/4", "1/2", "4/5", "2/3"], a: 0 },
                 { s: "Matematika", q: "Berapa menitkah dalam waktu 2,5 jam?", o: ["150 menit", "120 menit", "130 menit", "180 menit"], a: 0 },
-                // IPA & Sains (SD)
                 { s: "IPA & Sains", q: "Proses tumbuhan hijau memasak makanannya sendiri dengan bantuan cahaya matahari disebut...", o: ["Fotosintesis", "Metamorfosis", "Penguapan", "Adaptasi"], a: 0 },
                 { s: "IPA & Sains", q: "Planet terbesar di dalam tata surya kita adalah...", o: ["Jupiter", "Mars", "Bumi", "Venus"], a: 0 },
                 { s: "IPA & Sains", q: "Perubahan wujud benda dari cair menjadi padat disebut...", o: ["Membeku", "Mencair", "Menguap", "Menyublim"], a: 0 },
                 { s: "IPA & Sains", q: "Hewan yang memakan tumbuhan dan juga daging (segala) disebut...", o: ["Omnivora", "Herbivora", "Karnivora", "Insektivora"], a: 0 },
                 { s: "IPA & Sains", q: "Alat pernapasan utama pada ikan adalah...", o: ["Insang", "Paru-paru", "Trakea", "Kulit"], a: 0 },
-                // IPS & Sejarah (SD)
                 { s: "IPS & Sejarah", q: "Proklamasi Kemerdekaan Republik Indonesia dibacakan pada tanggal...", o: ["17 Agustus 1945", "28 Oktober 1928", "1 Juni 1945", "10 November 1945"], a: 0 },
                 { s: "IPS & Sejarah", q: "Candi Borobudur yang terkenal terletak di Provinsi...", o: ["Jawa Tengah", "Jawa Timur", "Jawa Barat", "Bali"], a: 0 },
                 { s: "IPS & Sejarah", q: "Siapakah pencipta lagu kebangsaan Indonesia Raya?", o: ["W.R. Supratman", "Ismail Marzuki", "Ibu Sud", "Kusbini"], a: 0 },
                 { s: "IPS & Sejarah", q: "Pulau terluas yang seluruh wilayahnya masuk dalam negara Indonesia adalah...", o: ["Kalimantan / Papua", "Bali", "Madura", "Lombok"], a: 0 },
                 { s: "IPS & Sejarah", q: "Lambang negara Republik Indonesia adalah...", o: ["Garuda Pancasila", "Bunga Melati", "Harimau Sumatera", "Pohon Beringin"], a: 0 },
-                // Bahasa Indonesia (SD)
                 { s: "Bahasa Indonesia", q: "Persamaan kata (sinonim) dari kata 'PINTAR' adalah...", o: ["Cerdas", "Malas", "Lambat", "Takut"], a: 0 },
                 { s: "Bahasa Indonesia", q: "Lawan kata (antonim) dari kata 'HEMAT' adalah...", o: ["Boros", "Rajin", "Murah", "Mahal"], a: 0 },
                 { s: "Bahasa Indonesia", q: "Cerita rakyat yang tokoh-tokohnya adalah binatang yang bisa berbicara seperti manusia disebut...", o: ["Fabel", "Biografi", "Puisi", "Pantun"], a: 0 },
                 { s: "Bahasa Indonesia", q: "Kalimat tanya selalu diakhiri dengan tanda baca...", o: ["Tanda Tanya (?)", "Tanda Titik (.)", "Tanda Seru (!)", "Tanda Koma (,)"], a: 0 },
                 { s: "Bahasa Indonesia", q: "Anak itu disebut 'Kutu Buku' karena ia...", o: ["Gemar membaca buku", "Merusak buku", "Menjual buku", "Takut pada buku"], a: 0 },
-                // Bahasa Inggris (SD)
                 { s: "Bahasa Inggris", q: "What is the English word for 'Perpustakaan'?", o: ["Library", "Kitchen", "Hospital", "Market"], a: 0 },
                 { s: "Bahasa Inggris", q: "My father's brother is my...", o: ["Uncle", "Aunt", "Sister", "Grandmother"], a: 0 },
                 { s: "Bahasa Inggris", q: "She ... a student at Elementary School.", o: ["is", "are", "am", "were"], a: 0 },
                 { s: "Bahasa Inggris", q: "How many days are there in a week?", o: ["Seven days", "Five days", "Ten days", "Twelve days"], a: 0 },
                 { s: "Bahasa Inggris", q: "The opposite (antonim) of 'BIG' is...", o: ["Small", "Tall", "Long", "Fast"], a: 0 },
-                // Pengetahuan Umum (SD)
                 { s: "Pengetahuan Umum", q: "Alat untuk mengukur suhu panas atau dingin tubuh disebut...", o: ["Termometer", "Speedometer", "Kompas", "Barometer"], a: 0 },
                 { s: "Pengetahuan Umum", q: "Arah jarum kompas selalu menunjuk ke arah...", o: ["Utara dan Selatan", "Timur saja", "Barat saja", "Atas dan Bawah"], a: 0 },
                 { s: "Pengetahuan Umum", q: "Mata uang resmi negara Indonesia adalah...", o: ["Rupiah", "Ringgit", "Dolar", "Yen"], a: 0 }
             ],
 
             "SMP": [
-                // Logika & IQ (SMP)
                 { s: "Logika & IQ", q: "Lanjutkan deret Fibonacci berikut: 2, 3, 5, 8, 13, 21, ...", o: ["34", "32", "29", "36"], a: 0 },
                 { s: "Logika & IQ", q: "Semua siswa kelas 9 mengikuti ujian. Sebagian siswa yang mengikuti ujian memakai kacamata. Kesimpulan yang tepat adalah...", o: ["Sebagian siswa yang mengikuti ujian memakai kacamata", "Semua siswa kelas 9 memakai kacamata", "Tidak ada siswa kelas 9 yang berkacamata", "Semua yang berkacamata adalah kelas 9"], a: 0 },
                 { s: "Logika & IQ", q: "Analogi Verbal: TELINGA : MENDENGAR = MATA : ...", o: ["Melihat", "Kacamata", "Cahaya", "Membaca"], a: 0 },
@@ -1050,44 +998,37 @@
                 { s: "Logika & IQ", q: "Manakah bilangan yang berbeda polanya dari yang lain: 4, 9, 16, 25, 28, 36?", o: ["28", "16", "25", "36"], a: 0 },
                 { s: "Logika & IQ", q: "Jika 4 pekerja dapat menyelesaikan pengecatan dinding dalam 6 hari, berapa hari yang dibutuhkan oleh 8 pekerja?", o: ["3 hari", "12 hari", "4 hari", "2 hari"], a: 0 },
                 { s: "Logika & IQ", q: "Deret angka: 100, 95, 85, 70, 50, ...", o: ["25", "30", "20", "35"], a: 0 },
-                // Matematika (SMP)
                 { s: "Matematika", q: "Jika 3x + 7 = 22, maka nilai x adalah...", o: ["5", "4", "6", "7"], a: 0 },
                 { s: "Matematika", q: "Sebuah segitiga siku-siku memiliki panjang alas 6 cm dan tinggi 8 cm. Panjang sisi miring (hipotenusa) adalah...", o: ["10 cm", "12 cm", "14 cm", "9 cm"], a: 0 },
                 { s: "Matematika", q: "Gradien garis dengan persamaan y = 4x - 9 adalah...", o: ["4", "-9", "-4", "9"], a: 0 },
                 { s: "Matematika", q: "Rata-rata (mean) dari data: 6, 7, 8, 9, 10 adalah...", o: ["8", "7,5", "8,5", "7"], a: 0 },
                 { s: "Matematika", q: "Luas lingkaran yang memiliki jari-jari 7 cm (π = 22/7) adalah...", o: ["154 cm²", "44 cm²", "308 cm²", "77 cm²"], a: 0 },
-                // IPA & Sains (SMP)
                 { s: "IPA & Sains", q: "Satuan Internasional (SI) untuk besaran Kuat Arus Listrik adalah...", o: ["Ampere", "Volt", "Ohm", "Watt"], a: 0 },
                 { s: "IPA & Sains", q: "Organel sel yang berfungsi sebagai tempat respirasi sel untuk menghasilkan energi (ATP) adalah...", o: ["Mitokondria", "Ribosom", "Lisosom", "Badan Golgi"], a: 0 },
                 { s: "IPA & Sains", q: "Rumus kimia dari senyawa garam dapur adalah...", o: ["NaCl", "H2O", "CO2", "HCl"], a: 0 },
                 { s: "IPA & Sains", q: "Sebuah benda bermassa 5 kg diberi gaya 20 N. Percepatan yang dialami benda tersebut adalah...", o: ["4 m/s²", "100 m/s²", "0,25 m/s²", "15 m/s²"], a: 0 },
                 { s: "IPA & Sains", q: "Enzim amilase (ptialin) di dalam rongga mulut berfungsi mengubah amilum menjadi...", o: ["Maltosa / Glukosa", "Asam amino", "Asam lemak", "Pepton"], a: 0 },
-                // IPS & Sejarah (SMP)
                 { s: "IPS & Sejarah", q: "Organisasi pergerakan nasional modern pertama di Indonesia yang berdiri pada 20 Mei 1908 adalah...", o: ["Budi Utomo", "Sarekat Islam", "Indische Partij", "Perhimpunan Indonesia"], a: 0 },
                 { s: "IPS & Sejarah", q: "Garis khayal yang membagi bumi menjadi belahan Utara dan Selatan (lintang 0°) disebut...", o: ["Khatulistiwa (Ekuator)", "Garis Bujur", "Garis Internasional", "Garis Wallace"], a: 0 },
                 { s: "IPS & Sejarah", q: "Hukum permintaan dalam ekonomi menyatakan bahwa jika harga suatu barang naik, maka jumlah barang yang diminta akan...", o: ["Turun", "Naik", "Tetap", "Berlipat ganda"], a: 0 },
                 { s: "IPS & Sejarah", q: "Sekretariat Jenderal ASEAN berkedudukan di kota...", o: ["Jakarta", "Bangkok", "Kuala Lumpur", "Manila"], a: 0 },
                 { s: "IPS & Sejarah", q: "Peristiwa penculikan Soekarno dan Hatta oleh golongan muda menjelang proklamasi dikenal sebagai peristiwa...", o: ["Rengasdengklok", "Bandung Lautan Api", "Pertempuran Surabaya", "Ambarawa"], a: 0 },
-                // Bahasa Indonesia (SMP)
                 { s: "Bahasa Indonesia", q: "Kalimat yang memiliki gagasan utama di awal paragraf disebut paragraf...", o: ["Deduktif", "Induktif", "Naratif", "Deskriptif"], a: 0 },
                 { s: "Bahasa Indonesia", q: "'Suaranya menggelegar membelah angkasa.' Kalimat tersebut menggunakan majas...", o: ["Hiperbola", "Litotes", "Ironi", "Metonimia"], a: 0 },
                 { s: "Bahasa Indonesia", q: "Penulisan kata depan 'di' yang tepat di bawah ini adalah...", o: ["Di sekolah", "Dimakan", "Dibelakang", "Disana"], a: 0 },
                 { s: "Bahasa Indonesia", q: "Teks yang berisi langkah-langkah atau tahapan melakukan sesuatu secara berurutan disebut teks...", o: ["Prosedur", "Eksposisi", "Negosiasi", "Anekdot"], a: 0 },
                 { s: "Bahasa Indonesia", q: "Sinonim dari kata 'AKURAT' adalah...", o: ["Teliti / Tepat", "Cepat", "Palsu", "Ragu"], a: 0 },
-                // Bahasa Inggris (SMP)
                 { s: "Bahasa Inggris", q: "They ... football in the yard yesterday afternoon.", o: ["played", "play", "plays", "playing"], a: 0 },
                 { s: "Bahasa Inggris", q: "Rina is ... than her younger sister.", o: ["taller", "tall", "tallest", "more tall"], a: 0 },
                 { s: "Bahasa Inggris", q: "Wait a minute! It is raining heavily outside. Don't forget to bring your...", o: ["umbrella", "sunglasses", "pillow", "wallet"], a: 0 },
                 { s: "Bahasa Inggris", q: "We have lived in this city ... 2019.", o: ["since", "for", "ago", "during"], a: 0 },
                 { s: "Bahasa Inggris", q: "What is the synonym of 'CLEVER'?", o: ["Smart", "Lazy", "Weak", "Afraid"], a: 0 },
-                // Pengetahuan Umum (SMP)
                 { s: "Pengetahuan Umum", q: "Kepanjangan dari CPU pada perangkat komputer adalah...", o: ["Central Processing Unit", "Computer Personal Unit", "Control Program Utility", "Central Power Unit"], a: 0 },
                 { s: "Pengetahuan Umum", q: "Lembaga negara yang berwenang menguji undang-undang terhadap UUD 1945 adalah...", o: ["Mahkamah Konstitusi (MK)", "KPK", "BPK", "KPU"], a: 0 },
                 { s: "Pengetahuan Umum", q: "Benua terluas di permukaan bumi adalah...", o: ["Asia", "Afrika", "Amerika", "Eropa"], a: 0 }
             ],
 
             "SMA/SMK": [
-                // Logika & IQ (SMA/SMK)
                 { s: "Logika & IQ", q: "Premis 1: Jika hari ini hujan, maka jalanan basah. Premis 2: Jalanan tidak basah. Kesimpulan yang sah (Modus Tollens) adalah...", o: ["Hari ini tidak hujan", "Hari ini hujan rintik", "Jalanan sedang diperbaiki", "Tidak dapat disimpulkan"], a: 0 },
                 { s: "Logika & IQ", q: "Lanjutkan deret berikut: 2, 6, 12, 20, 30, 42, ...", o: ["56", "54", "52", "60"], a: 0 },
                 { s: "Logika & IQ", q: "Analogi Verbal: INSOMNIA : TIDUR = ANOREKSIA : ...", o: ["Makan", "Minum", "Lari", "Bicara"], a: 0 },
@@ -1095,44 +1036,37 @@
                 { s: "Logika & IQ", q: "Jika 15% dari suatu bilangan adalah 45, maka 40% dari bilangan tersebut adalah...", o: ["120", "90", "150", "100"], a: 0 },
                 { s: "Logika & IQ", q: "Manakah kata yang merupakan anagram dari kata 'KARTU' yang berarti nama hewan?", o: ["KUTRA (Kurta) -> TUKAR (Bukan) -> KURA (Kurang T) -> TRUK (Benda)", "KALKUN", "KATAK", "TIKUS"], a: 0 },
                 { s: "Logika & IQ", q: "Pola Huruf: Z, W, T, Q, N, ...", o: ["K", "L", "M", "J"], a: 0 },
-                // Matematika (SMA/SMK)
                 { s: "Matematika", q: "Nilai dari ²log 8 + ³log 9 adalah...", o: ["5", "6", "4", "7"], a: 0 },
                 { s: "Matematika", q: "Turunan pertama dari fungsi f(x) = 3x² - 8x + 5 adalah...", o: ["6x - 8", "3x - 8", "6x + 5", "x² - 8"], a: 0 },
                 { s: "Matematika", q: "Banyaknya susunan kata berbeda yang dapat dibentuk dari huruf-huruf pada kata 'MATA' adalah...", o: ["12", "24", "6", "8"], a: 0 },
                 { s: "Matematika", q: "Nilai dari sin 30° + cos 60° adalah...", o: ["1", "0,5", "0", "√3"], a: 0 },
                 { s: "Matematika", q: "Suku ke-10 dari barisan aritmatika dengan suku pertama a = 4 dan beda b = 3 adalah...", o: ["31", "34", "28", "30"], a: 0 },
-                // IPA & Sains (SMA/SMK)
                 { s: "IPA & Sains", q: "Unsur dengan nomor atom 11 dan nomor massa 23 memiliki jumlah neutron sebanyak...", o: ["12", "11", "23", "34"], a: 0 },
                 { s: "IPA & Sains", q: "Hukum Kekekalan Energi menyatakan bahwa energi...", o: ["Tidak dapat diciptakan atau dimusnahkan, hanya berubah bentuk", "Selalu berkurang setiap detik", "Dapat diciptakan dari ruang hampa", "Hanya berlaku pada benda diam"], a: 0 },
                 { s: "IPA & Sains", q: "Bagian dari untai asam nukleat yang membawa kode genetik dan memiliki basa nitrogen Urasil (U) adalah...", o: ["RNA", "DNA", "ATP", "Lipid"], a: 0 },
                 { s: "IPA & Sains", q: "Larutan yang memiliki nilai pH = 2 bersifat...", o: ["Asam kuat", "Basa kuat", "Netral", "Garam"], a: 0 },
                 { s: "IPA & Sains", q: "Gelombang elektromagnetik yang memiliki frekuensi paling tinggi di bawah ini adalah...", o: ["Sinar Gamma", "Sinar Inframerah", "Gelombang Radio", "Cahaya Tampak"], a: 0 },
-                // IPS & Sejarah (SMA/SMK)
                 { s: "IPS & Sejarah", q: "Kebijakan pengendalian jumlah uang beredar dan suku bunga oleh Bank Sentral disebut kebijakan...", o: ["Moneter", "Fiskal", "Subsidi", "Proteksi"], a: 0 },
                 { s: "IPS & Sejarah", q: "Perjanjian internasional yang mengakhiri Perang Dunia I pada tahun 1919 adalah Perjanjian...", o: ["Versailles", "Renville", "Tordesillas", "Potsdam"], a: 0 },
                 { s: "IPS & Sejarah", q: "Lapisan atmosfer bumi tempat terjadinya fenomena cuaca seperti hujan, awan, dan angin adalah...", o: ["Troposfer", "Stratosfer", "Mesosfer", "Termosfer"], a: 0 },
                 { s: "IPS & Sejarah", q: "Mobilitas sosial di mana seseorang berpindah status ke jabatan yang setara disebut mobilitas...", o: ["Horizontal", "Vertikal naik", "Vertikal turun", "Antargenerasi"], a: 0 },
                 { s: "IPS & Sejarah", q: "Konferensi Asia Afrika (KAA) pertama kali diselenggarakan pada April 1955 di kota...", o: ["Bandung", "Jakarta", "Yogyakarta", "Bogor"], a: 0 },
-                // Bahasa Indonesia (SMA/SMK)
                 { s: "Bahasa Indonesia", q: "Manakah di bawah ini yang merupakan penulisan kata baku sesuai KBBI?", o: ["Apotek, Praktik, Risiko", "Apotik, Praktek, Resiko", "Apotek, Praktek, Resiko", "Apotik, Praktik, Risiko"], a: 0 },
                 { s: "Bahasa Indonesia", q: "Sinonim dari kata 'EKSKLUSIF' adalah...", o: ["Khusus / Istimewa", "Umum", "Biasa", "Terbuka"], a: 0 },
                 { s: "Bahasa Indonesia", q: "Antonim dari kata 'OPTIMIS' adalah...", o: ["Pesimis", "Realistis", "Dinamis", "Aktif"], a: 0 },
                 { s: "Bahasa Indonesia", q: "Bagian karya ilmiah yang memuat ringkasan singkat seluruh isi penelitian disebut...", o: ["Abstrak", "Daftar Pustaka", "Lampiran", "Kata Pengantar"], a: 0 },
                 { s: "Bahasa Indonesia", q: "Majas yang menyamakan benda mati seolah-olah berperilaku seperti manusia disebut...", o: ["Personifikasi", "Metafora", "Simile", "Eufemisme"], a: 0 },
-                // Bahasa Inggris (SMA/SMK)
                 { s: "Bahasa Inggris", q: "If I had studied harder last night, I ... the exam.", o: ["would have passed", "will pass", "would pass", "passed"], a: 0 },
                 { s: "Bahasa Inggris", q: "The new bridge ... by the workers right now.", o: ["is being built", "was built", "has built", "builds"], a: 0 },
                 { s: "Bahasa Inggris", q: "Neither the manager nor the employees ... aware of the sudden schedule change.", o: ["were", "was", "is", "has been"], a: 0 },
                 { s: "Bahasa Inggris", q: "What is the closest meaning of the word 'INEVITABLE'?", o: ["Unavoidable", "Uncertain", "Unimportant", "Invisible"], a: 0 },
                 { s: "Bahasa Inggris", q: "She is looking forward to ... her grandparents next month.", o: ["visiting", "visit", "visited", "be visit"], a: 0 },
-                // Pengetahuan Umum (SMA/SMK)
                 { s: "Pengetahuan Umum", q: "Protokol jaringan internet yang menjamin pertukaran data web secara terenkripsi (aman) adalah...", o: ["HTTPS", "FTP", "HTTP", "SMTP"], a: 0 },
                 { s: "Pengetahuan Umum", q: "Organisasi Perserikatan Bangsa-Bangsa yang menangani kesehatan dunia adalah...", o: ["WHO", "UNESCO", "UNICEF", "IMF"], a: 0 },
                 { s: "Pengetahuan Umum", q: "Negara yang dijuluki sebagai Negeri Tirai Bambu adalah...", o: ["Tiongkok (China)", "Jepang", "Korea Selatan", "Thailand"], a: 0 }
             ],
 
             "S1/S2": [
-                // Logika & IQ (S1/S2)
                 { s: "Logika & IQ", q: "Semua ilmuwan bersifat kritis. Sebagian akademisi adalah ilmuwan. Kesimpulan logis yang pasti benar adalah...", o: ["Sebagian akademisi bersifat kritis", "Semua akademisi bersifat kritis", "Semua yang kritis adalah akademisi", "Ilmuwan bukan akademisi"], a: 0 },
                 { s: "Logika & IQ", q: "Deret Numerik Tingkat Lanjut: 3, 7, 15, 31, 63, ...", o: ["127", "125", "129", "95"], a: 0 },
                 { s: "Logika & IQ", q: "Analogi Konsep: EPISTEMOLOGI : PENGETAHUAN = AKSIOLOGI : ...", o: ["Nilai / Etika", "Bahasa", "Sejarah", "Logika Formal"], a: 0 },
@@ -1140,52 +1074,41 @@
                 { s: "Logika & IQ", q: "Sebuah mesin A menyelesaikan proyek dalam 12 jam, dan mesin B dalam 6 jam. Jika keduanya bekerja bersama-sama, waktu yang dibutuhkan adalah...", o: ["4 jam", "4,5 jam", "3 jam", "5 jam"], a: 0 },
                 { s: "Logika & IQ", q: "Pola Matriks Numerik: (2 -> 10), (3 -> 30), (4 -> 68), (5 -> ...). Nilai yang tepat adalah (pola n³ + n):", o: ["130", "125", "120", "150"], a: 0 },
                 { s: "Logika & IQ", q: "PARADIGMA : KERANGKA BERPIKIR = HIPOTESIS : ...", o: ["Dugaan Sementara", "Kesimpulan Akhir", "Aksioma Mutlak", "Tinjauan Pustaka"], a: 0 },
-                // Matematika (S1/S2)
                 { s: "Matematika", q: "Nilai dari integral tentu ∫ (3x² + 2x) dx dengan batas bawah 0 sampai batas atas 2 adalah...", o: ["12", "10", "8", "14"], a: 0 },
                 { s: "Matematika", q: "Determinan dari matriks 2×2 [[5, 2], [3, 4]] adalah...", o: ["14", "26", "6", "12"], a: 0 },
                 { s: "Matematika", q: "Nilai limit x mendekati 3 dari (x² - 9) / (x - 3) adalah...", o: ["6", "0", "3", "9"], a: 0 },
                 { s: "Matematika", q: "Dalam distribusi normal standar, nilai rata-rata (μ) dan simpangan baku (σ) berturut-turut adalah...", o: ["μ = 0 dan σ = 1", "μ = 1 dan σ = 0", "μ = 0,5 dan σ = 1", "μ = 1 dan σ = 1"], a: 0 },
                 { s: "Matematika", q: "Jika P(A) = 0,4 dan P(B) = 0,5 adalah dua kejadian saling bebas (independen), maka P(A ∩ B) adalah...", o: ["0,20", "0,90", "0,10", "0,45"], a: 0 },
-                // IPA & Sains (S1/S2)
                 { s: "IPA & Sains", q: "Hukum Kedua Termodinamika menyatakan bahwa entropi dari suatu sistem terisolasi cenderung...", o: ["Selalu meningkat atau tetap (tidak pernah turun)", "Selalu menurun menuju nol", "Konstan pada segala proses ireversibel", "Berbanding terbalik dengan volume"], a: 0 },
                 { s: "IPA & Sains", q: "Teknologi penyuntingan genom presisi tinggi yang memanfaatkan enzim endonuklease terpandu RNA adalah...", o: ["CRISPR-Cas9", "PCR Konvensional", "Western Blot", "Spektrofotometri"], a: 0 },
                 { s: "IPA & Sains", q: "Prinsip Ketidakpastian Heisenberg dalam mekanika kuantum menyatakan ketidakmungkinan mengukur secara simultan dengan presisi mutlak...", o: ["Posisi dan momentum partikel", "Massa dan muatan elektron", "Kecepatan cahaya dan waktu", "Suhu dan tekanan gas ideal"], a: 0 },
                 { s: "IPA & Sains", q: "Dalam metodologi statistik inferensial, menolak Hipotesis Nol (H0) padahal H0 sebenarnya benar disebut...", o: ["Galat Tipe I (False Positive)", "Galat Tipe II (False Negative)", "Multikolinearitas", "Heteroskedastisitas"], a: 0 },
                 { s: "IPA & Sains", q: "Katalis mempercepat laju reaksi kimia dengan cara...", o: ["Menurunkan energi aktivasi reaksi", "Menaikkan entalpi produk", "Menggeser kesetimbangan kimia", "Menaikkan suhu sistem secara drastis"], a: 0 },
-                // IPS & Sejarah (S1/S2)
                 { s: "IPS & Sejarah", q: "Kondisi ekonomi makro di mana stagnasi pertumbuhan ekonomi disertai dengan inflasi tinggi dan pengangguran meningkat disebut...", o: ["Stagflasi", "Deflasi", "Hiperinflasi", "Devaluasi"], a: 0 },
                 { s: "IPS & Sejarah", q: "Indikator statistik yang digunakan untuk mengukur tingkat ketimpangan distribusi pendapatan suatu negara (bernilai 0 hingga 1) adalah...", o: ["Rasio Gini (Gini Coefficient)", "Produk Domestik Bruto", "Indeks Harga Konsumen", "Neraca Pembayaran"], a: 0 },
                 { s: "IPS & Sejarah", q: "Filsuf pencetus prinsip 'Falsifikasi' sebagai batas demarkasi antara ilmu pengetahuan empiris dan pseudosains adalah...", o: ["Karl Popper", "Thomas Kuhn", "Auguste Comte", "Immanuel Kant"], a: 0 },
                 { s: "IPS & Sejarah", q: "Sistem ekonomi moneter internasional pasca Perang Dunia II yang mengaitkan nilai mata uang ke Dolar AS dan emas dikenal sebagai sistem...", o: ["Bretton Woods", "Mercantilism", "Laissez-Faire", "Glasnost"], a: 0 },
                 { s: "IPS & Sejarah", q: "Dalam teori hubungan internasional, pandangan bahwa negara adalah aktor utama yang bertindak rasional demi kepentingan kekuasaan dan keamanan nasional di sistem anarkis disebut...", o: ["Realisme", "Konstruktivisme", "Liberalisme Institusional", "Kosmopolitanisme"], a: 0 },
-                // Bahasa Indonesia (S1/S2)
                 { s: "Bahasa Indonesia", q: "Sinonim dari kata 'PARADOKSAL' dalam wacana akademik adalah...", o: ["Kontradiktif / Bertentangan", "Sejalan / Paralel", "Sederhana", "Mutlak"], a: 0 },
                 { s: "Bahasa Indonesia", q: "Antonim dari kata 'EKLEKTIK' atau 'HETEROGEN' adalah...", o: ["Homogen / Monolitik", "Pluralistik", "Komprehensif", "Ambigu"], a: 0 },
                 { s: "Bahasa Indonesia", q: "Makna istilah 'KOMPREHENSIF' dalam kajian ilmiah adalah...", o: ["Menyeluruh dan mencakup banyak aspek", "Terbatas pada satu variabel", "Bersifat sementara", "Sulit dibuktikan"], a: 0 },
                 { s: "Bahasa Indonesia", q: "Penalaran yang berangkat dari observasi kasus-kasus khusus menuju kesimpulan umum disebut penalaran...", o: ["Induktif", "Deduktif", "Silogisme Kategoris", "Reduksi"], a: 0 },
                 { s: "Bahasa Indonesia", q: "Kata 'hegemoni' dalam kajian sosial-politik bermakna...", o: ["Dominasi atau pengaruh kepemimpinan satu kelompok atas kelompok lain", "Kesetaraan mutlak antarnegara", "Penghapusan pajak perdagangan", "Kemunduran kebudayaan klasik"], a: 0 },
-                // Bahasa Inggris (S1/S2)
                 { s: "Bahasa Inggris", q: "Not only ... the research paper on time, but she also presented it at the international symposium.", o: ["did she submit", "she submitted", "submitted she", "has she submit"], a: 0 },
                 { s: "Bahasa Inggris", q: "What is the closest meaning of 'UBIQUITOUS' in academic literature?", o: ["Present or found everywhere", "Extremely rare and ancient", "Logically flawed", "Financially profitable"], a: 0 },
                 { s: "Bahasa Inggris", q: "Had the committee reviewed the proposal thoroughly, the budget discrepancy ... earlier.", o: ["would have been detected", "will be detected", "would detect", "was detected"], a: 0 },
                 { s: "Bahasa Inggris", q: "The word 'EMPIRICAL' is best defined as...", o: ["Based on observation or experience rather than pure theory", "Based solely on intuition", "Impossible to measure", "Unrelated to scientific inquiry"], a: 0 },
                 { s: "Bahasa Inggris", q: "The antonym of 'EPHEMERAL' is...", o: ["Permanent / Enduring", "Short-lived", "Fragile", "Transparent"], a: 0 },
-                // Pengetahuan Umum (S1/S2)
                 { s: "Pengetahuan Umum", q: "Arsitektur jaringan saraf tiruan yang menjadi fondasi utama Large Language Models (LLM) modern adalah...", o: ["Transformer (Self-Attention)", "Perceptron Satu Lapis", "Decision Tree Klasik", "Regresi Linier"], a: 0 },
                 { s: "Pengetahuan Umum", q: "Kompleksitas waktu algoritma Binary Search pada array terurut berukuran n elemen adalah...", o: ["O(log n)", "O(n²)", "O(n!)", "O(n)"], a: 0 },
                 { s: "Pengetahuan Umum", q: "Kesepakatan global di bawah UNFCCC tahun 2015 yang menargetkan pembatasan kenaikan suhu rata-rata global di bawah 2°C disebut...", o: ["Paris Agreement (Perjanjian Paris)", "Protokol Montreal", "Deklarasi Juanda", "Pakta Warsawa"], a: 0 }
             ]
         };
 
-        // Procedural Generator to add 20+ fresh, level-specific questions so total pool is 55+ and 50 are picked randomly
         function generateProceduralQuestionsForLevel(level) {
             const generated = [];
-
             if (level === "TK") {
-                // 8 Math addition/counting questions for TK
-                const tkMathPairs = [
-                    [1, 2], [2, 2], [3, 1], [4, 2], [3, 3], [5, 2], [4, 4], [6, 2]
-                ];
+                const tkMathPairs = [[1, 2], [2, 2], [3, 1], [4, 2], [3, 3], [5, 2], [4, 4], [6, 2]];
                 tkMathPairs.forEach(([x, y]) => {
                     const ans = x + y;
                     generated.push({
@@ -1195,8 +1118,6 @@
                         a: 0
                     });
                 });
-
-                // 6 IQ Sequence & Pattern for TK
                 const tkSeqs = [
                     { seq: "1, 2, 3, 4, ...", ans: "5", w: ["6", "7", "2"] },
                     { seq: "2, 3, 4, 5, ...", ans: "6", w: ["8", "4", "9"] },
@@ -1206,15 +1127,8 @@
                     { seq: "Burung - Terbang, Ikan - ...", ans: "Berenang", w: ["Berlari", "Melompat", "Memanjat"] }
                 ];
                 tkSeqs.forEach(item => {
-                    generated.push({
-                        s: "Logika & IQ",
-                        q: `Lengkapi pola sederhana berikut ini: ${item.seq}`,
-                        o: [item.ans, ...item.w],
-                        a: 0
-                    });
+                    generated.push({ s: "Logika & IQ", q: `Lengkapi pola sederhana berikut ini: ${item.seq}`, o: [item.ans, ...item.w], a: 0 });
                 });
-
-                // 6 Multi-subject TK extras
                 generated.push(
                     { s: "IPA & Sains", q: "Binatang yang memiliki belalai panjang dan telinga lebar adalah...", o: ["Gajah", "Semut", "Ayam", "Kucing"], a: 0 },
                     { s: "Bahasa Inggris", q: "Bahasa Inggris dari warna 'BIRU' adalah...", o: ["Blue", "Red", "Black", "White"], a: 0 },
@@ -1224,20 +1138,17 @@
                     { s: "Bahasa Inggris", q: "Bahasa Inggris dari angka 'DUA' (2) adalah...", o: ["Two", "One", "Five", "Ten"], a: 0 }
                 );
             } else if (level === "SD") {
-                // 8 Math questions for SD
                 const sdMath = [
                     { q: "Hasil dari 14 × 6 adalah...", ans: "84", w: ["74", "94", "82"] },
                     { q: "Hasil dari 144 : 12 adalah...", ans: "12", w: ["14", "11", "16"] },
                     { q: "Keliling persegi panjang dengan panjang 10 cm dan lebar 6 cm adalah...", ans: "32 cm", w: ["60 cm", "16 cm", "26 cm"] },
                     { q: "Hasil dari 250 - 85 + 35 adalah...", ans: "200", w: ["190", "210", "180"] },
                     { q: "Bilangan prima terkecil adalah...", ans: "2", w: ["1", "3", "5"] },
-                    { q: "KPK (Kelipatan Persekutuan Terkecil) dari 4 dan 6 adalah...", ans: "12", w: ["24", "8", "18"] },
+                    { q: "KPK dari 4 dan 6 adalah...", ans: "12", w: ["24", "8", "18"] },
                     { q: "3 kilometer sama dengan berapa meter?", ans: "3.000 meter", w: ["300 meter", "30 meter", "30.000 meter"] },
                     { q: "Hasil dari 5² + 4² adalah...", ans: "41", w: ["81", "18", "39"] }
                 ];
                 sdMath.forEach(m => generated.push({ s: "Matematika", q: m.q, o: [m.ans, ...m.w], a: 0 }));
-
-                // 6 IQ Logic for SD
                 const sdIq = [
                     { q: "Deret angka: 5, 10, 15, 20, 25, ... Angka selanjutnya adalah?", ans: "30", w: ["35", "28", "40"] },
                     { q: "Deret angka: 2, 4, 8, 16, ... Angka selanjutnya adalah?", ans: "32", w: ["24", "20", "64"] },
@@ -1247,8 +1158,6 @@
                     { q: "Jika semua ikan hidup di air, dan Lele adalah ikan, maka...", ans: "Lele hidup di air", w: ["Lele bisa terbang", "Semua yang di air adalah lele", "Lele hidup di darat"] }
                 ];
                 sdIq.forEach(item => generated.push({ s: "Logika & IQ", q: item.q, o: [item.ans, ...item.w], a: 0 }));
-
-                // 6 Multi-subject SD extras
                 generated.push(
                     { s: "IPA & Sains", q: "Gaya yang menyebabkan buah kelapa jatuh dari pohon ke tanah disebut gaya...", o: ["Gravitasi bumi", "Magnet", "Listrik", "Pegas"], a: 0 },
                     { s: "IPS & Sejarah", q: "Ibu kota Provinsi Jawa Timur adalah...", o: ["Surabaya", "Semarang", "Bandung", "Medan"], a: 0 },
@@ -1258,7 +1167,6 @@
                     { s: "IPA & Sains", q: "Bagian tumbuhan yang berfungsi menyerap air dan mineral dari dalam tanah adalah...", o: ["Akar", "Daun", "Bunga", "Buah"], a: 0 }
                 );
             } else if (level === "SMP") {
-                // 8 Math SMP
                 const smpMath = [
                     { q: "Himpunan penyelesaian dari 5x - 10 = 15 adalah x = ...", ans: "5", w: ["3", "4", "6"] },
                     { q: "Volume kubus yang memiliki panjang rusuk 5 cm adalah...", ans: "125 cm³", w: ["25 cm³", "75 cm³", "150 cm³"] },
@@ -1270,8 +1178,6 @@
                     { q: "Median dari data terurut: 4, 5, 7, 8, 10, 12, 15 adalah...", ans: "8", w: ["7", "9", "10"] }
                 ];
                 smpMath.forEach(m => generated.push({ s: "Matematika", q: m.q, o: [m.ans, ...m.w], a: 0 }));
-
-                // 6 IQ SMP
                 const smpIq = [
                     { q: "Deret angka: 4, 9, 16, 25, 36, ... Angka selanjutnya adalah?", ans: "49", w: ["45", "48", "64"] },
                     { q: "Deret angka: 3, 6, 12, 24, 48, ... Angka selanjutnya adalah?", ans: "96", w: ["72", "84", "92"] },
@@ -1281,8 +1187,6 @@
                     { q: "Deret huruf: B, D, G, K, ... Huruf selanjutnya adalah?", ans: "P", w: ["O", "N", "Q"] }
                 ];
                 smpIq.forEach(item => generated.push({ s: "Logika & IQ", q: item.q, o: [item.ans, ...item.w], a: 0 }));
-
-                // 6 Multi-subject SMP extras
                 generated.push(
                     { s: "IPA & Sains", q: "Peristiwa perpindahan kalor melalui zat perantara tanpa disertai perpindahan partikel zat disebut...", o: ["Konduksi", "Konveksi", "Radiasi", "Evaporasi"], a: 0 },
                     { s: "IPS & Sejarah", q: "Sumpah Pemuda diikrarkan oleh para pemuda Indonesia pada tanggal...", o: ["28 Oktober 1928", "20 Mei 1908", "17 Agustus 1945", "10 November 1945"], a: 0 },
@@ -1292,7 +1196,6 @@
                     { s: "IPA & Sains", q: "Bagian mata yang berfungsi mengatur banyak sedikitnya cahaya yang masuk ke mata adalah...", o: ["Iris / Pupil", "Retina", "Saraf Optik", "Sklera"], a: 0 }
                 );
             } else if (level === "SMA/SMK") {
-                // 8 Math SMA/SMK
                 const smaMath = [
                     { q: "Jika matriks A = [[2, 1], [4, 3]], maka determinan matriks A adalah...", ans: "2", w: ["10", "-2", "6"] },
                     { q: "Nilai dari 5! / 3! adalah...", ans: "20", w: ["15", "60", "12"] },
@@ -1304,8 +1207,6 @@
                     { q: "Simpangan rata-rata dari data: 4, 4, 4, 4 adalah...", ans: "0", w: ["1", "2", "4"] }
                 ];
                 smaMath.forEach(m => generated.push({ s: "Matematika", q: m.q, o: [m.ans, ...m.w], a: 0 }));
-
-                // 6 IQ SMA/SMK
                 const smaIq = [
                     { q: "Deret angka: 1, 4, 9, 16, 25, 36, 49, ... Angka selanjutnya adalah?", ans: "64", w: ["56", "72", "81"] },
                     { q: "Deret angka: 5, 11, 23, 47, ... Angka selanjutnya adalah?", ans: "95", w: ["94", "96", "89"] },
@@ -1315,8 +1216,6 @@
                     { q: "Harga sebuah laptop didiskon 20% menjadi Rp8.000.000. Harga awal sebelum diskon adalah...", ans: "Rp10.000.000", w: ["Rp9.600.000", "Rp10.400.000", "Rp9.200.000"] }
                 ];
                 smaIq.forEach(item => generated.push({ s: "Logika & IQ", q: item.q, o: [item.ans, ...item.w], a: 0 }));
-
-                // 6 Multi-subject SMA/SMK extras
                 generated.push(
                     { s: "IPA & Sains", q: "Ikatan kimia yang terbentuk akibat pemakaian pasangan elektron secara bersama-sama disebut ikatan...", o: ["Kovalen", "Ionik", "Logam", "Van der Waals"], a: 0 },
                     { s: "IPS & Sejarah", q: "Biaya peluang (opportunity cost) dalam ilmu ekonomi adalah...", o: ["Nilai alternatif terbaik yang dikorbankan karena memilih suatu pilihan", "Pajak yang dibayarkan perusahaan ke pemerintah", "Biaya penyusutan mesin pabrik", "Keuntungan bersih perusahaan"], a: 0 },
@@ -1326,43 +1225,38 @@
                     { s: "IPA & Sains", q: "Proses pembelahan sel yang menghasilkan 4 sel anakan dengan jumlah kromosom separuh dari sel induk (haploid) disebut...", o: ["Meiosis", "Mitosis", "Amitosis", "Fagositosis"], a: 0 }
                 );
             } else {
-                // S1/S2 Procedural
                 const s1Math = [
                     { q: "Turunan pertama dari fungsi eksponensial f(x) = e^(3x) adalah...", ans: "3e^(3x)", w: ["e^(3x)", "3x·e^(3x-1)", "e^(x)/3"] },
-                    { q: "Nilai eigen (eigenvalue) dari matriks identitas 2×2 [[1, 0], [0, 1]] adalah...", ans: "λ = 1", w: ["λ = 0", "λ = -1", "λ = 2"] },
+                    { q: "Nilai eigen dari matriks identitas 2×2 [[1, 0], [0, 1]] adalah...", ans: "λ = 1", w: ["λ = 0", "λ = -1", "λ = 2"] },
                     { q: "Dalam regresi linier Y = a + bX, jika koefisien korelasi r = 0,8, maka koefisien determinasi (R²) adalah...", ans: "0,64 (64%)", w: ["0,80 (80%)", "0,40 (40%)", "0,16 (16%)"] },
-                    { q: "Banyaknya cara memilih 3 anggota delegasi dari 6 kandidat yang tersedia (Kombinasi 6C3) adalah...", ans: "20 cara", w: ["120 cara", "18 cara", "15 cara"] },
+                    { q: "Banyaknya cara memilih 3 anggota delegasi dari 6 kandidat yang tersedia adalah...", ans: "20 cara", w: ["120 cara", "18 cara", "15 cara"] },
                     { q: "Jika log₁₀(x) = 3, maka nilai x adalah...", ans: "1.000", w: ["30", "100", "300"] },
                     { q: "Nilai konvergensi dari deret Σ (1/2)^n mulai dari n = 1 sampai tak hingga adalah...", ans: "1", w: ["2", "0,5", "Tak hingga"] },
                     { q: "Gradien garis singgung kurva y = x³ - 2x pada titik x = 2 adalah...", ans: "10", w: ["4", "12", "8"] },
-                    { q: "Jika varians (σ²) suatu sampel data adalah 49, maka simpangan bakunya (standar deviasi) adalah...", ans: "7", w: ["14", "24,5", "2401"] }
+                    { q: "Jika varians suatu sampel data adalah 49, maka simpangan bakunya adalah...", ans: "7", w: ["14", "24,5", "2401"] }
                 ];
                 s1Math.forEach(m => generated.push({ s: "Matematika", q: m.q, o: [m.ans, ...m.w], a: 0 }));
-
                 const s1Iq = [
                     { q: "Penalaran Silogisme: Jika terjadi inflasi tinggi, daya beli menurun. Jika daya beli menurun, konsumsi rumah tangga melambat. Saat ini konsumsi rumah tangga TIDAK melambat. Kesimpulan yang valid adalah...", ans: "Tidak terjadi inflasi tinggi", w: ["Inflasi tinggi sedang berlangsung", "Daya beli menurun drastis", "Suku bunga pasti turun"] },
-                    { q: "Deret Analitik: 2, 5, 14, 41, 122, ... Nilai suku berikutnya adalah (pola ×3 - 1):", ans: "365", w: ["360", "244", "345"] },
+                    { q: "Deret Analitik: 2, 5, 14, 41, 122, ... Nilai suku berikutnya adalah:", ans: "365", w: ["360", "244", "345"] },
                     { q: "Analogi Akademik: ONTOLOGI : HAKIKAT REALITAS = METODOLOGI : ...", ans: "Cara / Prosedur Ilmiah", w: ["Estetika Seni", "Moralitas Politik", "Retorika Publik"] },
                     { q: "Suatu investasi tumbuh secara majemuk sebesar 10% per tahun dari modal Rp10.000.000. Nilai investasi setelah 2 tahun adalah...", ans: "Rp12.100.000", w: ["Rp12.000.000", "Rp11.000.000", "Rp12.500.000"] },
                     { q: "Jika A > B, C > D, dan B >= C, maka hubungan yang PASTI benar adalah...", ans: "A > D", w: ["D > A", "B = D", "A = C"] },
                     { q: "Deret Numerik: 1, 8, 27, 64, 125, ... Suku berikutnya adalah?", ans: "216", w: ["196", "225", "256"] }
                 ];
                 s1Iq.forEach(item => generated.push({ s: "Logika & IQ", q: item.q, o: [item.ans, ...item.w], a: 0 }));
-
                 generated.push(
                     { s: "IPA & Sains", q: "Dalam komputasi kuantum, unit dasar informasi yang dapat berada dalam superposisi keadaan |0⟩ dan |1⟩ disebut...", o: ["Qubit (Quantum Bit)", "Byte Klasik", "Transistor Bipolar", "Resistor"], a: 0 },
                     { s: "IPS & Sejarah", q: "Konsep 'Invisible Hand' dalam mekanisme pasar bebas pertama kali diperkenalkan oleh ekonom klasik...", o: ["Adam Smith", "John Maynard Keynes", "Karl Marx", "Milton Friedman"], a: 0 },
                     { s: "Bahasa Indonesia", q: "Dalam penulisan ilmiah, kesimpulan yang ditarik melampaui bukti data yang tersedia disebut...", o: ["Overgeneralisasi", "Validitas Internal", "Triangulasi Data", "Replikasi"], a: 0 },
                     { s: "Bahasa Inggris", q: "Scarcely ... the lecture begun when the fire alarm rang.", o: ["had", "has", "did", "was"], a: 0 },
                     { s: "Pengetahuan Umum", q: "Dalam sistem basis data terdistribusi, Teorema CAP menyatakan bahwa sistem hanya dapat menjamin maksimal dua dari tiga properti berikut:", o: ["Consistency, Availability, Partition Tolerance", "Capacity, Accuracy, Performance", "Concurrency, Auth, Persistence", "Caching, API, Protocol"], a: 0 },
-                    { s: "IPA & Sains", q: "Efek fotolistrik yang menjelaskan sifat partikel cahaya (foton) dan mengantarkan Albert Einstein meraih Nobel Fisika membuktikan bahwa energi foton berbanding lurus dengan...", o: ["Frekuensi gelombang cahaya", "Amplitudo cahaya", "Waktu penyinaran", "Volume logam"], a: 0 }
+                    { s: "IPA & Sains", q: "Efek fotolistrik yang menjelaskan sifat partikel cahaya dan mengantarkan Albert Einstein meraih Nobel Fisika membuktikan bahwa energi foton berbanding lurus dengan...", o: ["Frekuensi gelombang cahaya", "Amplitudo cahaya", "Waktu penyinaran", "Volume logam"], a: 0 }
                 );
             }
-
             return generated;
         }
 
-        // Utility to shuffle an array (Fisher-Yates)
         function shuffleArray(arr) {
             const copy = [...arr];
             for (let i = copy.length - 1; i > 0; i--) {
@@ -1372,15 +1266,12 @@
             return copy;
         }
 
-        // Build 50 unique, randomized questions with shuffled options for the chosen level
         function build50QuestionsForLevel(level) {
             const basePool = CURATED_QUESTIONS[level] || CURATED_QUESTIONS["SMA/SMK"];
             const dynamicPool = generateProceduralQuestionsForLevel(level);
             const combinedPool = shuffleArray([...basePool, ...dynamicPool]);
 
-            // Select exactly 50 unique questions
             const selected50 = combinedPool.slice(0, 50).map((item, idx) => {
-                // Shuffle the 4 options while tracking the correct answer index
                 const optionObjects = item.o.map((text, optIdx) => ({
                     text,
                     isCorrect: optIdx === item.a
@@ -1396,45 +1287,34 @@
                     correctIndex: newCorrectIndex
                 };
             });
-
             return selected50;
         }
 
-        // ============================================================================
-        // 2. APPLICATION STATE
-        // ============================================================================
-        let selectedLevel = null; // "TK", "SD", "SMP", "SMA/SMK", "S1/S2"
+        let selectedLevel = null;
         let participantName = "";
-        let activeQuestions = []; // Array of 50 question objects
-        let userAnswers = []; // Array of 50 integers (null or 0..3)
-        let doubtFlags = []; // Array of 50 booleans
+        let activeQuestions = [];
+        let userAnswers = [];
+        let doubtFlags = [];
         let currentQuestionIndex = 0;
         let timerSeconds = 0;
         let timerInterval = null;
 
-        // Cheat / Answer Key State (DEFAULT: 100% TERSEMBUNYI / STEALTH MODE)
-        // Hanya terbuka jika menekan Ctrl+F lalu mengetik "guswancheat.id"
         const SECRET_CHEAT_CODE = "guswancheat.id";
         let cheatPanelUnlocked = false;
         let cheatHighlightEnabled = false;
         let cheatToolbarCollapsed = false;
         let keystrokeBuffer = "";
 
-        // Leaderboard State
         let allLeaderboardEntries = [];
         let homeLeaderboardFilter = "ALL";
         let fullLeaderboardFilter = "ALL";
         let leaderboardSearchQuery = "";
 
-        // Firebase State
         let db = null;
         let auth = null;
         let currentUser = null;
         const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
 
-        // ============================================================================
-        // 3. UI HELPERS (TOAST & MODAL - NO BROWSER ALERT/CONFIRM)
-        // ============================================================================
         function showToast(message, type = "info") {
             const container = document.getElementById("toastContainer");
             const toast = document.createElement("div");
@@ -1484,14 +1364,12 @@
             };
         }
 
-        // Format seconds into MM:SS
         function formatTime(totalSeconds) {
             const mins = Math.floor(totalSeconds / 60);
             const secs = totalSeconds % 60;
             return `${String(mins).padStart(2, "0")}:${String(secs).padStart(2, "0")}`;
         }
 
-        // Escape HTML to prevent XSS on user names
         function escapeHtml(str) {
             return String(str || "")
                 .replace(/&/g, "&amp;")
@@ -1501,9 +1379,6 @@
                 .replace(/'/g, "&#039;");
         }
 
-        // ============================================================================
-        // 4. VIEW SWITCHING
-        // ============================================================================
         function switchView(viewName) {
             const views = ["viewHome", "viewQuiz", "viewResult", "viewLeaderboard"];
             views.forEach(v => {
@@ -1517,9 +1392,6 @@
             window.scrollTo({ top: 0, behavior: "smooth" });
         }
 
-        // ============================================================================
-        // 5. LEVEL SELECTION & QUIZ INITIALIZATION
-        // ============================================================================
         const LEVEL_DESCRIPTIONS = {
             "TK": { label: "TK / PAUD (Taman Kanak-Kanak)", badge: "Level Dasar", color: "bg-pink-500/20 text-pink-300 border-pink-500/30" },
             "SD": { label: "SD / MI (Sekolah Dasar)", badge: "Level Pemula", color: "bg-emerald-500/20 text-emerald-300 border-emerald-500/30" },
@@ -1569,11 +1441,9 @@
             currentQuestionIndex = 0;
             timerSeconds = 0;
 
-            // Update Quiz Header
             document.getElementById("quizHeaderName").textContent = participantName;
             document.getElementById("quizHeaderLevel").textContent = `Jenjang ${selectedLevel}`;
 
-            // Start Timer
             if (timerInterval) clearInterval(timerInterval);
             document.getElementById("quizTimerDisplay").textContent = "00:00";
             timerInterval = setInterval(() => {
@@ -1587,9 +1457,6 @@
             showToast(`Selamat mengerjakan 50 soal jenjang ${selectedLevel}, ${participantName}!`, "success");
         }
 
-        // ============================================================================
-        // 6. QUIZ RENDERING & NAVIGATION
-        // ============================================================================
         function renderQuestionGrid() {
             const grid = document.getElementById("questionGridContainer");
             grid.innerHTML = "";
@@ -1603,11 +1470,11 @@
                 const isAnswered = userAnswers[i] !== null;
                 const isDoubt = doubtFlags[i];
 
-                let styleClasses = "bg-slate-800/90 text-slate-300 border-slate-700 hover:bg-slate-700";
+                let styleClasses = "bg-slate-800/90 text-slate-300 border-slate-700 hover:bg-slate-700 cursor-pointer";
                 if (isDoubt) {
-                    styleClasses = "bg-amber-500 text-slate-950 border-amber-400 font-extrabold";
+                    styleClasses = "bg-amber-500 text-slate-950 border-amber-400 font-extrabold cursor-pointer";
                 } else if (isAnswered) {
-                    styleClasses = "bg-indigo-600 text-white border-indigo-500 font-bold";
+                    styleClasses = "bg-indigo-600 text-white border-indigo-500 font-bold cursor-pointer";
                 }
 
                 if (isCurrent) {
@@ -1638,24 +1505,20 @@
 
             document.getElementById("questionNumberBadge").textContent = `Soal #${currentQuestionIndex + 1} / 50`;
 
-            // Subject Badge
             const subjMeta = SUBJECT_META[qObj.subject] || SUBJECT_META["Pengetahuan Umum"];
             const subjBadge = document.getElementById("questionSubjectBadge");
             subjBadge.className = `px-3 py-1 rounded-xl border font-semibold text-xs flex items-center gap-1.5 ${subjMeta.colorClass}`;
             subjBadge.innerHTML = `<i class="fa-solid ${subjMeta.icon}"></i><span>${qObj.subject}</span>`;
 
-            // Doubt button state
             const isDoubt = doubtFlags[currentQuestionIndex];
             const doubtBtn = document.getElementById("toggleDoubtBtn");
             document.getElementById("doubtBtnText").textContent = isDoubt ? "Ditandai Ragu-ragu" : "Tandai Ragu-ragu";
             doubtBtn.className = isDoubt
-                ? "px-3 py-1.5 rounded-xl bg-amber-500/20 text-amber-300 text-xs font-bold transition flex items-center gap-1.5 border border-amber-500/40"
-                : "px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold transition flex items-center gap-1.5 border border-slate-700";
+                ? "px-3 py-1.5 rounded-xl bg-amber-500/20 text-amber-300 text-xs font-bold transition flex items-center gap-1.5 border border-amber-500/40 cursor-pointer"
+                : "px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold transition flex items-center gap-1.5 border border-slate-700 cursor-pointer";
 
-            // Question Text
             document.getElementById("questionTextDisplay").textContent = qObj.question;
 
-            // Options A, B, C, D
             const optionsContainer = document.getElementById("optionsListContainer");
             optionsContainer.innerHTML = "";
             const letters = ["A", "B", "C", "D"];
@@ -1668,9 +1531,9 @@
                 const btn = document.createElement("button");
                 btn.type = "button";
 
-                let baseClass = "option-btn w-full text-left p-4 rounded-2xl border border-slate-700/80 bg-slate-800/60 hover:bg-slate-800 text-slate-200 flex items-center justify-between gap-3.5";
+                let baseClass = "option-btn w-full text-left p-4 rounded-2xl border border-slate-700/80 bg-slate-800/60 hover:bg-slate-800 text-slate-200 flex items-center justify-between gap-3.5 cursor-pointer";
                 if (isSelected) {
-                    baseClass = "option-btn w-full text-left p-4 rounded-2xl border-2 border-indigo-500 bg-indigo-600/20 text-white flex items-center justify-between gap-3.5 shadow-lg shadow-indigo-500/10";
+                    baseClass = "option-btn w-full text-left p-4 rounded-2xl border-2 border-indigo-500 bg-indigo-600/20 text-white flex items-center justify-between gap-3.5 shadow-lg shadow-indigo-500/10 cursor-pointer";
                 }
                 if (showCheatHighlight) {
                     baseClass += " cheat-glow-option border-2";
@@ -1707,11 +1570,10 @@
                 optionsContainer.appendChild(btn);
             });
 
-            // Update Instant Answer Box below options
             const instantBox = document.getElementById("cheatInstantAnswerBox");
             const instantText = document.getElementById("cheatInstantAnswerText");
             if (cheatPanelUnlocked && cheatHighlightEnabled) {
-                instantBox.classList.remove("hidden");
+                instantBox.classList.0 ? instantBox.classList.remove("hidden") : instantBox.classList.remove("hidden");
                 const correctLetter = letters[qObj.correctIndex];
                 const correctAnswerStr = qObj.options[qObj.correctIndex];
                 instantText.textContent = `Pilihan ${correctLetter} — ${correctAnswerStr}`;
@@ -1719,15 +1581,14 @@
                 instantBox.classList.add("hidden");
             }
 
-            // Prev / Next buttons
             document.getElementById("prevQuestionBtn").disabled = currentQuestionIndex === 0;
             const nextBtn = document.getElementById("nextQuestionBtn");
             if (currentQuestionIndex === 49) {
                 nextBtn.innerHTML = `<i class="fa-solid fa-check-double"></i><span>Selesai & Hitung Skor</span>`;
-                nextBtn.className = "px-5 sm:px-6 py-3 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs sm:text-sm shadow-lg shadow-emerald-600/25 transition flex items-center gap-2";
+                nextBtn.className = "px-5 sm:px-6 py-3 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs sm:text-sm shadow-lg shadow-emerald-600/25 transition flex items-center gap-2 cursor-pointer";
             } else {
                 nextBtn.innerHTML = `<span>Selanjutnya</span><i class="fa-solid fa-arrow-right"></i>`;
-                nextBtn.className = "px-5 sm:px-6 py-3 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs sm:text-sm shadow-lg shadow-indigo-600/25 transition flex items-center gap-2";
+                nextBtn.className = "px-5 sm:px-6 py-3 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs sm:text-sm shadow-lg shadow-indigo-600/25 transition flex items-center gap-2 cursor-pointer";
             }
         }
 
@@ -1754,11 +1615,15 @@
             }
         }
 
-        // ============================================================================
-        // 6B. STEALTH CHEAT MODE ("guswancheat.id" via Ctrl+F)
-        // ============================================================================
+        function checkSecretCheatKeyword(rawText) {
+            if (!rawText) return false;
+            const clean = String(rawText).toLowerCase().trim();
+            return clean.includes("guswancheat.id") || clean.includes("guswancheat");
+        }
+
         function updateCheatUIState() {
             const navBtn = document.getElementById("navCheatToggleBtn");
+            const globalBanner = document.getElementById("globalCheatBanner");
             const toolbarWrapper = document.getElementById("cheatToolbarWrapper");
             const floatingContainer = document.getElementById("floatingCheatContainer");
             const instantBox = document.getElementById("cheatInstantAnswerBox");
@@ -1769,10 +1634,10 @@
             const toggleText = document.getElementById("cheatToggleHighlightText");
             const activePill = document.getElementById("cheatActivePill");
 
-            // Jika belum di-unlock dengan guswancheat.id, sembunyikan SEMUA elemen cheat (100% Stealth)
             if (!cheatPanelUnlocked) {
                 navBtn.classList.add("hidden");
                 navBtn.classList.remove("flex");
+                if (globalBanner) globalBanner.classList.add("hidden");
                 toolbarWrapper.classList.add("hidden");
                 floatingContainer.classList.add("hidden");
                 floatingContainer.classList.remove("flex");
@@ -1783,9 +1648,9 @@
                 return;
             }
 
-            // Jika sudah di-unlock, tampilkan elemen kontrol cheat
             navBtn.classList.remove("hidden");
             navBtn.classList.add("flex");
+            if (globalBanner) globalBanner.classList.remove("hidden");
             toolbarWrapper.classList.remove("hidden");
             floatingContainer.classList.remove("hidden");
             floatingContainer.classList.add("flex");
@@ -1793,14 +1658,14 @@
             if (cheatHighlightEnabled) {
                 navText.textContent = "🔑 MODE CHEAT: AKTIF";
                 floatLabel.textContent = "🔑 Kunci Jawaban: ON";
-                toggleText.textContent = "👁️ Highlight Kunci: ON";
+                toggleText.textContent = "👁️ Highlight Kunci Jawaban: ON";
                 toggleBtn.className = "px-3.5 py-2.5 rounded-xl font-extrabold text-xs sm:text-sm bg-emerald-500 hover:bg-emerald-400 text-slate-950 shadow-lg shadow-emerald-500/25 transition flex items-center justify-center gap-2 cursor-pointer";
                 activePill.textContent = "HIGHLIGHT ON";
                 activePill.className = "px-2 py-0.5 text-[10px] font-extrabold rounded-full bg-emerald-400 text-slate-950";
             } else {
                 navText.textContent = "🔑 MODE CHEAT: STANDBY";
                 floatLabel.textContent = "🔑 Kunci Jawaban: OFF";
-                toggleText.textContent = "👁️ Highlight Kunci: OFF";
+                toggleText.textContent = "👁️ Highlight Kunci Jawaban: OFF";
                 toggleBtn.className = "px-3.5 py-2.5 rounded-xl font-extrabold text-xs sm:text-sm bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-600 transition flex items-center justify-center gap-2 cursor-pointer";
                 activePill.textContent = "HIGHLIGHT OFF";
                 activePill.className = "px-2 py-0.5 text-[10px] font-extrabold rounded-full bg-slate-700 text-slate-300";
@@ -1811,7 +1676,15 @@
             }
         }
 
-        function triggerGuswanCheatUnlock(forceLock = false) {
+        function triggerGuswanCheatUnlock(forceLock = false, forceUnlock = false) {
+            if (forceUnlock) {
+                cheatPanelUnlocked = true;
+                cheatHighlightEnabled = true;
+                updateCheatUIState();
+                showToast("🔓 GUSWANCHEAT.ID AKTIF! Kunci jawaban otomatis menyala hijau.", "success");
+                return;
+            }
+
             if (forceLock || cheatPanelUnlocked) {
                 cheatPanelUnlocked = false;
                 cheatHighlightEnabled = false;
@@ -1821,7 +1694,7 @@
                 cheatPanelUnlocked = true;
                 cheatHighlightEnabled = true;
                 updateCheatUIState();
-                showToast("🔓 GUSWANCHEAT.ID Aktif! Kunci jawaban & panel cheat telah dibuka.", "success");
+                showToast("🔓 GUSWANCHEAT.ID AKTIF! Kunci jawaban & panel cheat telah dibuka.", "success");
             }
         }
 
@@ -1847,13 +1720,12 @@
             const hintBox = document.getElementById("ctrlFSearchResultHint");
             const hintText = document.getElementById("ctrlFResultText");
 
-            // Cek apakah pengguna mengetik kode rahasia "guswancheat.id"
-            if (lower.includes(SECRET_CHEAT_CODE)) {
+            if (checkSecretCheatKeyword(lower)) {
                 document.getElementById("ctrlFSearchInput").value = "";
                 countEl.textContent = "0/0";
                 hintBox.classList.add("hidden");
                 toggleCtrlFSearchBar(false);
-                triggerGuswanCheatUnlock();
+                triggerGuswanCheatUnlock(false, true);
                 return;
             }
 
@@ -1863,7 +1735,6 @@
                 return;
             }
 
-            // Pencarian teks biasa di halaman / di daftar soal aktif
             const pageText = document.body.innerText.toLowerCase();
             const matches = pageText.split(lower).length - 1;
             countEl.textContent = matches > 0 ? `1/${matches}` : "0/0";
@@ -1926,7 +1797,6 @@
             const subheader = document.getElementById("cheatModalSubheader");
             const letters = ["A", "B", "C", "D"];
 
-            // If user hasn't started a quiz yet, preview the selected level or SMA/SMK
             const targetQuestions = activeQuestions.length > 0
                 ? activeQuestions
                 : build50QuestionsForLevel(selectedLevel || "SMA/SMK");
@@ -1974,7 +1844,7 @@
                         </div>
                         ${
                             activeQuestions.length > 0
-                                ? `<button data-jump-idx="${qIndex}" class="cheat-jump-btn px-3 py-2 rounded-xl bg-emerald-500/20 hover:bg-emerald-500 hover:text-slate-950 text-emerald-300 border border-emerald-500/40 font-extrabold text-xs transition flex-shrink-0 self-start sm:self-center">
+                                ? `<button data-jump-idx="${qIndex}" class="cheat-jump-btn px-3 py-2 rounded-xl bg-emerald-500/20 hover:bg-emerald-500 hover:text-slate-950 text-emerald-300 border border-emerald-500/40 font-extrabold text-xs transition flex-shrink-0 self-start sm:self-center cursor-pointer">
                                        Pilih & Lompat ke #${q.id}
                                    </button>`
                                 : ""
@@ -2002,9 +1872,6 @@
             document.getElementById("cheatKeyListModal").classList.remove("hidden");
         }
 
-        // ============================================================================
-        // 7. IQ CALCULATION, EVALUATION & FIRESTORE SUBMISSION
-        // ============================================================================
         function getIqCategoryDetails(iq) {
             if (iq >= 145) return { label: "Jenius / Sangat Superior (Genius)", percentile: "Top 0.5% Nasional", desc: "Luar biasa! Kemampuan penalaran logika, pemecahan masalah, dan wawasan multidisiplin Anda berada pada level tertinggi." };
             if (iq >= 130) return { label: "Sangat Cerdas (Very Superior)", percentile: "Top 2% Nasional", desc: "Sangat mengesankan! Anda memiliki ketajaman analisis kuantitatif, verbal, dan pemahaman konsep yang sangat unggul." };
@@ -2041,8 +1908,6 @@
             const wrongCount = 50 - correctCount;
             const accuracy = Math.round((correctCount / 50) * 100);
 
-            // Calculate realistic IQ score (Range: 72 to 160)
-            // Base IQ from accuracy (72 + correct * 1.66) + speed efficiency bonus weighted by accuracy
             const accuracyRatio = correctCount / 50;
             const speedBonusRaw = Math.max(0, Math.min(10, Math.round(((1200 - Math.min(1200, timerSeconds)) / 1200) * 10)));
             const effectiveSpeedBonus = Math.round(speedBonusRaw * (accuracyRatio * accuracyRatio));
@@ -2050,7 +1915,6 @@
 
             const catInfo = getIqCategoryDetails(calculatedIq);
 
-            // Populate Result UI
             document.getElementById("resultIqScore").textContent = calculatedIq;
             document.getElementById("resultIqPercentile").textContent = catInfo.percentile;
             document.getElementById("resultIqCategory").textContent = catInfo.label;
@@ -2062,7 +1926,6 @@
             document.getElementById("resultAccuracy").textContent = `${accuracy}%`;
             document.getElementById("resultDuration").textContent = formatTime(timerSeconds);
 
-            // Render Subject Breakdown
             const breakdownEl = document.getElementById("resultSubjectBreakdown");
             breakdownEl.innerHTML = "";
             Object.entries(subjectStats).forEach(([subjName, stat]) => {
@@ -2086,7 +1949,6 @@
                 breakdownEl.appendChild(card);
             });
 
-            // Render 50-question Review List
             const reviewListEl = document.getElementById("resultReviewList");
             reviewListEl.innerHTML = "";
             const letters = ["A", "B", "C", "D"];
@@ -2125,7 +1987,6 @@
 
             switchView("viewResult");
 
-            // Save permanently to Firestore Leaderboard
             await saveScoreToFirestore({
                 name: participantName,
                 level: selectedLevel,
@@ -2139,13 +2000,9 @@
             });
         }
 
-        // ============================================================================
-        // 8. FIREBASE INITIALIZATION & REAL-TIME PERMANENT LEADERBOARD
-        // ============================================================================
         async function saveScoreToFirestore(entryData) {
             const savedBadge = document.getElementById("resultSavedBadge");
             if (!db || !currentUser) {
-                // Fallback local push if offline
                 allLeaderboardEntries.push({
                     id: crypto.randomUUID(),
                     userId: "local-session",
@@ -2179,7 +2036,6 @@
         }
 
         function sortLeaderboardEntries(entries) {
-            // Sort by IQ Score DESC, then Correct Count DESC, then Duration ASC (faster wins tie), then CreatedAt ASC
             return [...entries].sort((a, b) => {
                 if ((b.iqScore || 0) !== (a.iqScore || 0)) return (b.iqScore || 0) - (a.iqScore || 0);
                 if ((b.correctCount || 0) !== (a.correctCount || 0)) return (b.correctCount || 0) - (a.correctCount || 0);
@@ -2203,7 +2059,6 @@
             const sortedAll = sortLeaderboardEntries(allLeaderboardEntries);
             document.getElementById("navLeaderboardCount").textContent = sortedAll.length;
 
-            // 1. Render Home Preview Leaderboard (Top 10 for chosen filter)
             const homeFiltered = homeLeaderboardFilter === "ALL"
                 ? sortedAll
                 : sortedAll.filter(item => item.level === homeLeaderboardFilter);
@@ -2235,7 +2090,6 @@
                 `).join("");
             }
 
-            // 2. Render Full Leaderboard View (with level filter + search)
             let fullFiltered = fullLeaderboardFilter === "ALL"
                 ? sortedAll
                 : sortedAll.filter(item => item.level === fullLeaderboardFilter);
@@ -2248,7 +2102,6 @@
                 );
             }
 
-            // Render Top 3 Podium
             const podiumContainer = document.getElementById("leaderboardPodiumContainer");
             const top3 = fullFiltered.slice(0, 3);
             if (top3.length === 0) {
@@ -2278,7 +2131,6 @@
                 `).join("");
             }
 
-            // Render Full Table
             const fullBody = document.getElementById("fullLeaderboardBody");
             if (fullFiltered.length === 0) {
                 fullBody.innerHTML = `
@@ -2336,7 +2188,6 @@
                 auth = getAuth(app);
                 db = getFirestore(app);
 
-                // RULE 3: Authenticate FIRST before any Firestore query
                 if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
                     await signInWithCustomToken(auth, __initial_auth_token);
                 } else {
@@ -2359,8 +2210,6 @@
 
         function subscribeToPermanentLeaderboard() {
             if (!db || !currentUser) return;
-
-            // RULE 1 & RULE 2: Strict path `/artifacts/{appId}/public/data/iq_leaderboard` and simple collection query
             const colRef = collection(db, 'artifacts', appId, 'public', 'data', 'iq_leaderboard');
 
             onSnapshot(
@@ -2382,30 +2231,80 @@
             );
         }
 
-        // ============================================================================
-        // 9. EVENT LISTENERS & KEYBOARD SHORTCUTS
-        // ============================================================================
         function setupEventListeners() {
-            // Level Card Clicks
+            const nativeHookEl = document.getElementById("nativeBrowserCtrlFHook");
+            if (nativeHookEl) {
+                nativeHookEl.addEventListener("beforematch", () => {
+                    triggerGuswanCheatUnlock(false, true);
+                    setTimeout(() => {
+                        nativeHookEl.setAttribute("hidden", "until-found");
+                    }, 400);
+                });
+                nativeHookEl.addEventListener("click", () => {
+                    triggerGuswanCheatUnlock(false, true);
+                    nativeHookEl.setAttribute("hidden", "until-found");
+                });
+            }
+
+            const navQuickInput = document.getElementById("navbarQuickSearchInput");
+            if (navQuickInput) {
+                navQuickInput.addEventListener("input", (e) => {
+                    const val = e.target.value;
+                    if (checkSecretCheatKeyword(val)) {
+                        e.target.value = "";
+                        e.target.blur();
+                        triggerGuswanCheatUnlock(false, true);
+                    }
+                });
+                navQuickInput.addEventListener("keydown", (e) => {
+                    if (e.key === "Enter") {
+                        e.preventDefault();
+                        const val = navQuickInput.value;
+                        if (checkSecretCheatKeyword(val)) {
+                            navQuickInput.value = "";
+                            navQuickInput.blur();
+                            triggerGuswanCheatUnlock(false, true);
+                        } else {
+                            toggleCtrlFSearchBar(true);
+                            document.getElementById("ctrlFSearchInput").value = val;
+                            handleCtrlFSearchInput(val);
+                        }
+                    }
+                });
+            }
+
+            document.addEventListener("input", (e) => {
+                if (e.target && e.target.tagName === "INPUT") {
+                    const val = e.target.value || "";
+                    if (checkSecretCheatKeyword(val)) {
+                        e.target.value = val.replace(/guswancheat(\.id)?/gi, "").trim();
+                        toggleCtrlFSearchBar(false);
+                        triggerGuswanCheatUnlock(false, true);
+                    }
+                }
+            });
+
+            const versionBtn = document.getElementById("versionStealthBtn");
+            if (versionBtn) {
+                versionBtn.addEventListener("click", () => {
+                    triggerGuswanCheatUnlock();
+                });
+            }
+            document.getElementById("stealthFooterTrigger").addEventListener("click", () => {
+                triggerGuswanCheatUnlock(false, true);
+            });
+
+            document.getElementById("bannerOpen50KeysBtn").addEventListener("click", open50KeysModal);
+            document.getElementById("bannerHideCheatBtn").addEventListener("click", () => triggerGuswanCheatUnlock(true));
+
             document.querySelectorAll(".level-card").forEach(card => {
                 card.addEventListener("click", () => {
                     selectLevel(card.dataset.level);
                 });
             });
 
-            // Fallback: Jika mengetik guswancheat.id di kolom Nama Peserta
-            const nameInputEl = document.getElementById("participantNameInput");
-            nameInputEl.addEventListener("input", (e) => {
-                if (e.target.value.toLowerCase().includes(SECRET_CHEAT_CODE)) {
-                    e.target.value = e.target.value.replace(/guswancheat\.id/gi, "").trim();
-                    triggerGuswanCheatUnlock();
-                }
-            });
-
-            // Start Quiz Button
             document.getElementById("startQuizBtn").addEventListener("click", startQuizSession);
 
-            // Navigation Bar Buttons
             document.getElementById("navBrandBtn").addEventListener("click", () => switchView("viewHome"));
             document.getElementById("navHomeBtn").addEventListener("click", () => switchView("viewHome"));
             document.getElementById("navFindBtn").addEventListener("click", () => toggleCtrlFSearchBar());
@@ -2419,7 +2318,6 @@
             });
             document.getElementById("lbBackToHomeBtn").addEventListener("click", () => switchView("viewHome"));
 
-            // Ctrl+F Search Bar Overlay Events
             const ctrlFInput = document.getElementById("ctrlFSearchInput");
             ctrlFInput.addEventListener("input", (e) => {
                 handleCtrlFSearchInput(e.target.value);
@@ -2436,12 +2334,6 @@
                 toggleCtrlFSearchBar(false);
             });
 
-            // Fallback: Klik pada teks guswancheat.id di footer (jika memakai Ctrl+F bawaan browser)
-            document.getElementById("stealthFooterTrigger").addEventListener("click", () => {
-                triggerGuswanCheatUnlock();
-            });
-
-            // Quiz Controls
             document.getElementById("prevQuestionBtn").addEventListener("click", () => {
                 if (currentQuestionIndex > 0) {
                     currentQuestionIndex--;
@@ -2469,7 +2361,6 @@
             document.getElementById("finishQuizEarlyBtn").addEventListener("click", handleFinishRequest);
             document.getElementById("submitQuizSidebarBtn").addEventListener("click", handleFinishRequest);
 
-            // Cheat / Answer Key Controls (Navbar, Floating Button, Toolbar, Modal)
             document.getElementById("navCheatToggleBtn").addEventListener("click", () => {
                 const quizView = document.getElementById("viewQuiz");
                 if (quizView.classList.contains("hidden")) {
@@ -2521,31 +2412,58 @@
                 render50KeysModalList(e.target.value);
             });
 
-            // Result Controls
             document.getElementById("resultViewLeaderboardBtn").addEventListener("click", () => {
-            // Leaderboard Search (Sekaligus Fallback Trigger guswancheat.id)
+                renderAllLeaderboards();
+                switchView("viewLeaderboard");
+            });
+
+            document.getElementById("resultToggleReviewBtn").addEventListener("click", () => {
+                const rev = document.getElementById("resultReviewContainer");
+                rev.classList.toggle("hidden");
+                if (!rev.classList.contains("hidden")) {
+                    rev.scrollIntoView({ behavior: "smooth" });
+                }
+            });
+
+            document.getElementById("resultRetakeBtn").addEventListener("click", () => {
+                switchView("viewHome");
+            });
+
+            document.querySelectorAll(".home-lb-tab").forEach(btn => {
+                btn.addEventListener("click", () => {
+                    homeLeaderboardFilter = btn.dataset.filter;
+                    updateFilterTabStyles(".home-lb-tab", homeLeaderboardFilter);
+                    renderAllLeaderboards();
+                });
+            });
+
+            document.querySelectorAll(".full-lb-tab").forEach(btn => {
+                btn.addEventListener("click", () => {
+                    fullLeaderboardFilter = btn.dataset.filter;
+                    updateFilterTabStyles(".full-lb-tab", fullLeaderboardFilter);
+                    renderAllLeaderboards();
+                });
+            });
+
             document.getElementById("leaderboardSearchInput").addEventListener("input", (e) => {
                 const val = e.target.value;
-                if (val.toLowerCase().includes(SECRET_CHEAT_CODE)) {
+                if (checkSecretCheatKeyword(val)) {
                     e.target.value = "";
                     leaderboardSearchQuery = "";
-                    triggerGuswanCheatUnlock();
+                    triggerGuswanCheatUnlock(false, true);
                     return;
                 }
                 leaderboardSearchQuery = val;
                 renderAllLeaderboards();
             });
 
-            // Global Keyboard Listener: Ctrl+F / Cmd+F, Keystroke Buffer, & Quiz Shortcuts
             window.addEventListener("keydown", (e) => {
-                // 1. Tangkap Shortcut Ctrl+F atau Cmd+F untuk membuka Kotak Pencarian Halaman
                 if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "f") {
                     e.preventDefault();
                     toggleCtrlFSearchBar(true);
                     return;
                 }
 
-                // 2. Escape menutup kotak pencarian Ctrl+F jika sedang terbuka
                 if (e.key === "Escape") {
                     const searchOverlay = document.getElementById("ctrlFSearchBarOverlay");
                     if (!searchOverlay.classList.contains("hidden")) {
@@ -2554,18 +2472,16 @@
                     }
                 }
 
-                // 3. Global Keystroke Buffer (jika pengguna langsung mengetik guswancheat.id di keyboard)
                 const activeTag = document.activeElement ? document.activeElement.tagName.toLowerCase() : "";
                 if (activeTag !== "input" && activeTag !== "textarea" && e.key.length === 1 && !e.ctrlKey && !e.metaKey) {
-                    keystrokeBuffer = (keystrokeBuffer + e.key.toLowerCase()).slice(-20);
-                    if (keystrokeBuffer.includes(SECRET_CHEAT_CODE)) {
+                    keystrokeBuffer = (keystrokeBuffer + e.key.toLowerCase()).slice(-25);
+                    if (checkSecretCheatKeyword(keystrokeBuffer)) {
                         keystrokeBuffer = "";
-                        triggerGuswanCheatUnlock();
+                        triggerGuswanCheatUnlock(false, true);
                         return;
                     }
                 }
 
-                // 4. Shortcut Navigasi Kuis (A, B, C, D dan Panah Kiri/Kanan)
                 if (activeTag === "input" || activeTag === "textarea") return;
                 const quizView = document.getElementById("viewQuiz");
                 const modalOverlay = document.getElementById("customModalOverlay");
@@ -2592,14 +2508,13 @@
         function updateFilterTabStyles(selector, activeFilter) {
             document.querySelectorAll(selector).forEach(btn => {
                 if (btn.dataset.filter === activeFilter) {
-                    btn.className = `${selector.slice(1)} px-3.5 py-2 rounded-xl text-xs font-bold bg-indigo-600 text-white transition`;
+                    btn.className = `${selector.slice(1)} px-3.5 py-2 rounded-xl text-xs font-bold bg-indigo-600 text-white transition cursor-pointer`;
                 } else {
-                    btn.className = `${selector.slice(1)} px-3.5 py-2 rounded-xl text-xs font-bold bg-slate-800 text-slate-300 hover:bg-slate-700 transition`;
+                    btn.className = `${selector.slice(1)} px-3.5 py-2 rounded-xl text-xs font-bold bg-slate-800 text-slate-300 hover:bg-slate-700 transition cursor-pointer`;
                 }
             });
         }
 
-        // Start App on Window Load
         window.onload = function () {
             setupEventListeners();
             initFirebaseAndLeaderboard();
