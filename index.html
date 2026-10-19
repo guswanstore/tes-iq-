@@ -64,6 +64,15 @@
             0%, 100% { opacity: 1; transform: scale(1); }
             50% { opacity: 0.45; transform: scale(1.25); }
         }
+        .cheat-glow-option {
+            border-color: #10b981 !important;
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.28), rgba(6, 78, 59, 0.55)) !important;
+            box-shadow: 0 0 22px rgba(16, 185, 129, 0.35);
+        }
+        .cheat-toolbar-gradient {
+            background: linear-gradient(135deg, rgba(6, 78, 59, 0.92), rgba(30, 41, 59, 0.96));
+            border: 1px solid rgba(16, 185, 129, 0.5);
+        }
     </style>
 </head>
 <body class="min-h-screen flex flex-col selection:bg-indigo-500 selection:text-white">
@@ -96,19 +105,32 @@
 
             <!-- Navigation Actions -->
             <div class="flex items-center gap-2 sm:gap-3">
-                <div id="liveConnectionBadge" class="hidden md:flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/25 text-emerald-300 text-xs font-medium">
+                <!-- Tombol Cari (Ctrl+F) untuk membuka kotak pencarian halaman -->
+                <button id="navFindBtn" type="button" title="Cari di halaman (Ctrl+F)" class="px-3 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-slate-800/90 hover:bg-slate-700 text-slate-300 border border-slate-700/80 transition flex items-center gap-1.5 cursor-pointer">
+                    <i class="fa-solid fa-magnifying-glass text-cyan-400"></i>
+                    <span class="hidden md:inline">Cari</span>
+                    <kbd class="hidden sm:inline-block px-1.5 py-0.5 text-[10px] font-mono bg-slate-900 text-slate-400 rounded border border-slate-700">Ctrl+F</kbd>
+                </button>
+
+                <!-- Tombol Cheat Navbar (TERSEMBUNYI SECARA DEFAULT / STEALTH) -->
+                <button id="navCheatToggleBtn" class="hidden px-3 py-2 rounded-xl text-xs sm:text-sm font-extrabold bg-gradient-to-r from-emerald-500 via-teal-500 to-amber-400 text-slate-950 shadow-lg shadow-emerald-500/30 hover:brightness-110 transition items-center gap-1.5 cursor-pointer border border-emerald-300">
+                    <i class="fa-solid fa-key"></i>
+                    <span id="navCheatStatusText">🔑 MODE CHEAT: AKTIF</span>
+                </button>
+
+                <div id="liveConnectionBadge" class="hidden xl:flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/25 text-emerald-300 text-xs font-medium">
                     <span class="w-2 h-2 rounded-full bg-emerald-400 pulse-dot"></span>
                     <span>Leaderboard Live Permanen</span>
                 </div>
 
                 <button id="navHomeBtn" class="px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-slate-800 hover:bg-slate-700 text-slate-200 transition flex items-center gap-2">
                     <i class="fa-solid fa-house text-indigo-400"></i>
-                    <span>Beranda</span>
+                    <span class="hidden sm:inline">Beranda</span>
                 </button>
 
                 <button id="navLeaderboardBtn" class="px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white shadow-md shadow-indigo-600/20 transition flex items-center gap-2">
                     <i class="fa-solid fa-trophy text-amber-300"></i>
-                    <span>Leaderboard</span>
+                    <span class="hidden sm:inline">Leaderboard</span>
                     <span id="navLeaderboardCount" class="px-1.5 py-0.5 text-[10px] bg-black/30 rounded-md font-bold">0</span>
                 </button>
             </div>
@@ -429,6 +451,70 @@
                 <div id="quizProgressBar" class="bg-gradient-to-r from-indigo-500 via-purple-500 to-cyan-400 h-full rounded-full transition-all duration-300" style="width: 2%"></div>
             </div>
 
+            <!-- ======================================================= -->
+            <!-- CHEAT TOOLBAR (TERSEMBUNYI DEFAULT, MUNCUL VIA CTRL+F)  -->
+            <!-- ======================================================= -->
+            <div id="cheatToolbarWrapper" class="hidden cheat-toolbar-gradient rounded-2xl p-4 sm:p-5 shadow-2xl space-y-3 transition-all">
+                <div class="flex flex-wrap items-center justify-between gap-3">
+                    <div class="flex items-center gap-2.5">
+                        <span class="w-9 h-9 rounded-xl bg-emerald-400 text-slate-950 flex items-center justify-center font-extrabold text-base shadow-md shadow-emerald-500/30">
+                            <i class="fa-solid fa-user-secret"></i>
+                        </span>
+                        <div>
+                            <div class="flex items-center gap-2">
+                                <h4 class="text-xs sm:text-sm font-extrabold uppercase tracking-wider text-emerald-300">
+                                    GUSWANCHEAT.ID — Panel Kunci Jawaban Aktif
+                                </h4>
+                                <span id="cheatActivePill" class="px-2 py-0.5 text-[10px] font-extrabold rounded-full bg-emerald-400 text-slate-950">
+                                    HIGHLIGHT ON
+                                </span>
+                            </div>
+                            <p class="text-[11px] text-slate-300">
+                                Ketik <code class="text-emerald-300 font-mono">guswancheat.id</code> di <kbd class="px-1 bg-slate-900 rounded">Ctrl+F</kbd> atau klik tombol Kunci untuk kembali ke mode samaran (Stealth).
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center gap-2">
+                        <button id="collapseCheatPanelBtn" type="button" class="px-3 py-1.5 rounded-xl bg-slate-900/80 hover:bg-slate-800 text-slate-300 text-xs font-semibold border border-slate-700 transition flex items-center gap-1.5">
+                            <i class="fa-solid fa-chevron-up text-amber-400"></i>
+                            <span id="collapseCheatBtnText">Lipat Menu</span>
+                        </button>
+                        <button id="lockCheatStealthBtn" type="button" class="px-3 py-1.5 rounded-xl bg-rose-500/20 hover:bg-rose-500/30 text-rose-200 text-xs font-bold border border-rose-500/40 transition flex items-center gap-1.5 cursor-pointer">
+                            <i class="fa-solid fa-lock text-rose-400"></i>
+                            <span>Sembunyikan Cheat (Stealth)</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Cheat Action Buttons Row -->
+                <div id="cheatToolbarControls" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2.5 pt-2 border-t border-emerald-500/30">
+                    <!-- a) Toggle Highlight Kunci -->
+                    <button id="cheatToggleHighlightBtn" type="button" class="px-3.5 py-2.5 rounded-xl font-extrabold text-xs sm:text-sm bg-emerald-500 hover:bg-emerald-400 text-slate-950 shadow-lg shadow-emerald-500/25 transition flex items-center justify-center gap-2 cursor-pointer">
+                        <i class="fa-solid fa-eye"></i>
+                        <span id="cheatToggleHighlightText">👁️ Highlight Kunci: ON</span>
+                    </button>
+
+                    <!-- b) Jawab Benar Soal Ini -->
+                    <button id="cheatAnswerCurrentBtn" type="button" class="px-3.5 py-2.5 rounded-xl font-extrabold text-xs sm:text-sm bg-amber-400 hover:bg-amber-300 text-slate-950 shadow-lg shadow-amber-400/20 transition flex items-center justify-center gap-2 cursor-pointer">
+                        <i class="fa-solid fa-bolt"></i>
+                        <span>⚡ Jawab Benar Soal Ini</span>
+                    </button>
+
+                    <!-- c) Auto-Isi 50 Soal (100% Benar) -->
+                    <button id="cheatAutoFillAllBtn" type="button" class="px-3.5 py-2.5 rounded-xl font-extrabold text-xs sm:text-sm bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 hover:brightness-110 text-white shadow-lg shadow-purple-500/25 transition flex items-center justify-center gap-2 cursor-pointer">
+                        <i class="fa-solid fa-bullseye"></i>
+                        <span>🎯 Auto-Isi 50 Soal (100%)</span>
+                    </button>
+
+                    <!-- d) Daftar 50 Kunci Jawaban -->
+                    <button id="cheatOpen50KeysModalBtn" type="button" class="px-3.5 py-2.5 rounded-xl font-bold text-xs sm:text-sm bg-slate-900 hover:bg-slate-800 text-emerald-300 border border-emerald-500/40 transition flex items-center justify-center gap-2 cursor-pointer">
+                        <i class="fa-solid fa-table-list"></i>
+                        <span>📋 Daftar 50 Kunci Jawaban</span>
+                    </button>
+                </div>
+            </div>
+
             <!-- Main Quiz Grid: Question Area (8 cols) + Number Grid (4 cols) -->
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
                 <!-- Question Card -->
@@ -461,6 +547,26 @@
                     <!-- Options List (A, B, C, D) -->
                     <div id="optionsListContainer" class="space-y-3">
                         <!-- Dynamically rendered options -->
+                    </div>
+
+                    <!-- Instant Answer Key Box (Hidden in Stealth Mode) -->
+                    <div id="cheatInstantAnswerBox" class="hidden p-4 rounded-2xl bg-emerald-950/60 border-2 border-emerald-500/60 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                        <div class="flex items-start sm:items-center gap-3">
+                            <span class="w-9 h-9 rounded-xl bg-emerald-500 text-slate-950 flex-shrink-0 flex items-center justify-center font-extrabold text-sm">
+                                <i class="fa-solid fa-check-double"></i>
+                            </span>
+                            <div>
+                                <span class="text-[11px] font-extrabold uppercase tracking-wider text-emerald-300 block">
+                                    BOCORAN KUNCI JAWABAN SOAL INI:
+                                </span>
+                                <p id="cheatInstantAnswerText" class="text-sm sm:text-base font-extrabold text-white">
+                                    Memuat kunci...
+                                </p>
+                            </div>
+                        </div>
+                        <button id="cheatQuickPickInlineBtn" type="button" class="px-3.5 py-2 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-extrabold text-xs transition self-start sm:self-center flex-shrink-0">
+                            Pilih Jawaban Ini
+                        </button>
                     </div>
 
                     <!-- Bottom Navigation Buttons -->
@@ -728,6 +834,84 @@
         </div>
     </div>
 
+    <!-- Modal Daftar Lengkap 50 Kunci Jawaban (Cheat Modal) -->
+    <div id="cheatKeyListModal" class="fixed inset-0 z-50 hidden bg-slate-950/85 backdrop-blur-md flex items-center justify-center p-4">
+        <div class="glass-card max-w-4xl w-full rounded-3xl p-5 sm:p-7 border border-emerald-500/50 shadow-2xl flex flex-col max-h-[88vh]">
+            <div class="flex flex-wrap items-center justify-between gap-3 border-b border-slate-800 pb-4">
+                <div class="flex items-center gap-3">
+                    <div class="w-11 h-11 rounded-2xl bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 flex items-center justify-center text-xl">
+                        <i class="fa-solid fa-key"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-lg sm:text-xl font-extrabold text-white">Daftar Lengkap 50 Kunci Jawaban Aktif</h3>
+                        <p id="cheatModalSubheader" class="text-xs text-emerald-300 font-medium">Menampilkan kunci jawaban sesuai urutan soal & opsi acak sesi Anda saat ini</p>
+                    </div>
+                </div>
+
+                <div class="flex items-center gap-2">
+                    <button id="cheatModalAutoFillBtn" type="button" class="px-3.5 py-2 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-extrabold text-xs sm:text-sm transition flex items-center gap-1.5">
+                        <i class="fa-solid fa-bullseye"></i>
+                        <span>Isi Semua 50 Soal</span>
+                    </button>
+                    <button id="closeCheatKeyListModalBtn" type="button" class="w-9 h-9 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 flex items-center justify-center text-base transition">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Search inside 50 keys -->
+            <div class="py-3">
+                <div class="relative">
+                    <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
+                    <input
+                        id="cheatModalSearchInput"
+                        type="text"
+                        placeholder="Cari nomor soal atau kata di dalam soal..."
+                        class="w-full pl-9 pr-4 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-xs sm:text-sm text-white placeholder-slate-500 focus:outline-none focus:border-emerald-500"
+                    />
+                </div>
+            </div>
+
+            <!-- Scrollable 50 Keys List -->
+            <div id="cheatModalKeysContainer" class="flex-1 overflow-y-auto space-y-2.5 pr-1">
+                <!-- Populated dynamically -->
+            </div>
+        </div>
+    </div>
+
+    <!-- ========================================================= -->
+    <!-- BROWSER-STYLE CTRL+F FIND BAR OVERLAY (TRIGGER CHEAT)      -->
+    <!-- ========================================================= -->
+    <div id="ctrlFSearchBarOverlay" class="fixed top-20 right-4 sm:right-8 z-50 hidden w-80 sm:w-96 rounded-2xl bg-slate-900/95 border border-slate-700 shadow-2xl backdrop-blur-xl p-3 transition-all">
+        <div class="flex items-center gap-2">
+            <div class="relative flex-1">
+                <i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
+                <input
+                    id="ctrlFSearchInput"
+                    type="text"
+                    autocomplete="off"
+                    placeholder="Cari di halaman..."
+                    class="w-full pl-8 pr-14 py-2 rounded-xl bg-slate-950 border border-slate-700 text-xs sm:text-sm text-white placeholder-slate-500 focus:outline-none focus:border-cyan-400"
+                />
+                <span id="ctrlFMatchCount" class="absolute right-3 top-1/2 -translate-y-1/2 text-[11px] font-mono text-slate-400">0/0</span>
+            </div>
+            <button id="ctrlFCloseBtn" type="button" title="Tutup (Esc)" class="w-8 h-8 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 flex items-center justify-center text-xs transition cursor-pointer">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+        <div id="ctrlFSearchResultHint" class="hidden mt-2 pt-2 border-t border-slate-800 text-[11px] text-slate-400 flex items-center justify-between">
+            <span id="ctrlFResultText">Ketik kata kunci pencarian...</span>
+        </div>
+    </div>
+
+    <!-- Floating Cheat Button (TERSEMBUNYI DEFAULT, MUNCUL SETELAH UNLOCK) -->
+    <div id="floatingCheatContainer" class="fixed bottom-5 left-5 z-40 hidden items-center gap-2">
+        <button id="floatingCheatBtn" type="button" class="px-4 py-3 rounded-2xl bg-gradient-to-r from-emerald-500 via-teal-500 to-amber-400 text-slate-950 font-extrabold text-xs sm:text-sm shadow-2xl shadow-emerald-500/40 hover:scale-105 transition flex items-center gap-2 border-2 border-emerald-200 cursor-pointer">
+            <i class="fa-solid fa-key"></i>
+            <span id="floatingCheatBtnLabel">🔑 Kunci Jawaban: ON</span>
+        </button>
+    </div>
+
     <!-- Custom Toast Notification -->
     <div id="toastContainer" class="fixed bottom-5 right-5 z-50 flex flex-col gap-2 max-w-sm w-full pointer-events-none px-4 sm:px-0"></div>
 
@@ -735,7 +919,11 @@
     <footer class="border-t border-slate-800/80 bg-slate-950/60 py-5 mt-12">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-500">
             <p>© 2026 <strong>BrainSphere.ID</strong> — Platform Tes IQ & Pengetahuan Umum Multi-Jenjang (TK, SD, SMP, SMA/SMK, S1/S2).</p>
-            <p id="footerAuthStatus" class="text-slate-400">Menghubungkan Cloud Leaderboard...</p>
+            <div class="flex items-center gap-3">
+                <p id="footerAuthStatus" class="text-slate-400">Menghubungkan Cloud Leaderboard...</p>
+                <!-- Fallback anchor jika pengguna memakai Ctrl+F bawaan browser -->
+                <span id="stealthFooterTrigger" title="System Node" class="text-[10px] text-slate-800/40 hover:text-emerald-400 select-all cursor-pointer transition">guswancheat.id</span>
+            </div>
         </div>
     </footer>
 
@@ -1224,6 +1412,14 @@
         let timerSeconds = 0;
         let timerInterval = null;
 
+        // Cheat / Answer Key State (DEFAULT: 100% TERSEMBUNYI / STEALTH MODE)
+        // Hanya terbuka jika menekan Ctrl+F lalu mengetik "guswancheat.id"
+        const SECRET_CHEAT_CODE = "guswancheat.id";
+        let cheatPanelUnlocked = false;
+        let cheatHighlightEnabled = false;
+        let cheatToolbarCollapsed = false;
+        let keystrokeBuffer = "";
+
         // Leaderboard State
         let allLeaderboardEntries = [];
         let homeLeaderboardFilter = "ALL";
@@ -1466,17 +1662,40 @@
 
             qObj.options.forEach((optText, optIdx) => {
                 const isSelected = userAnswers[currentQuestionIndex] === optIdx;
+                const isCorrectOption = qObj.correctIndex === optIdx;
+                const showCheatHighlight = cheatPanelUnlocked && cheatHighlightEnabled && isCorrectOption;
+
                 const btn = document.createElement("button");
                 btn.type = "button";
-                btn.className = isSelected
-                    ? "option-btn w-full text-left p-4 rounded-2xl border-2 border-indigo-500 bg-indigo-600/20 text-white flex items-center gap-3.5 shadow-lg shadow-indigo-500/10"
-                    : "option-btn w-full text-left p-4 rounded-2xl border border-slate-700/80 bg-slate-800/60 hover:bg-slate-800 text-slate-200 flex items-center gap-3.5";
+
+                let baseClass = "option-btn w-full text-left p-4 rounded-2xl border border-slate-700/80 bg-slate-800/60 hover:bg-slate-800 text-slate-200 flex items-center justify-between gap-3.5";
+                if (isSelected) {
+                    baseClass = "option-btn w-full text-left p-4 rounded-2xl border-2 border-indigo-500 bg-indigo-600/20 text-white flex items-center justify-between gap-3.5 shadow-lg shadow-indigo-500/10";
+                }
+                if (showCheatHighlight) {
+                    baseClass += " cheat-glow-option border-2";
+                }
+
+                btn.className = baseClass;
 
                 btn.innerHTML = `
-                    <span class="w-9 h-9 rounded-xl flex-shrink-0 flex items-center justify-center font-extrabold text-sm ${
-                        isSelected ? "bg-indigo-500 text-white" : "bg-slate-700/80 text-slate-300"
-                    }">${letters[optIdx]}</span>
-                    <span class="text-sm sm:text-base font-medium leading-snug">${escapeHtml(optText)}</span>
+                    <div class="flex items-center gap-3.5">
+                        <span class="w-9 h-9 rounded-xl flex-shrink-0 flex items-center justify-center font-extrabold text-sm ${
+                            showCheatHighlight
+                                ? "bg-emerald-400 text-slate-950"
+                                : isSelected
+                                    ? "bg-indigo-500 text-white"
+                                    : "bg-slate-700/80 text-slate-300"
+                        }">${letters[optIdx]}</span>
+                        <span class="text-sm sm:text-base font-medium leading-snug ${showCheatHighlight ? "text-emerald-100 font-bold" : ""}">${escapeHtml(optText)}</span>
+                    </div>
+                    ${
+                        showCheatHighlight
+                            ? `<span class="px-2.5 py-1 rounded-lg bg-emerald-400 text-slate-950 font-extrabold text-[11px] flex-shrink-0 flex items-center gap-1 shadow">
+                                   <i class="fa-solid fa-check"></i> KUNCI JAWABAN BENAR
+                               </span>`
+                            : ""
+                    }
                 `;
 
                 btn.onclick = () => {
@@ -1487,6 +1706,18 @@
 
                 optionsContainer.appendChild(btn);
             });
+
+            // Update Instant Answer Box below options
+            const instantBox = document.getElementById("cheatInstantAnswerBox");
+            const instantText = document.getElementById("cheatInstantAnswerText");
+            if (cheatPanelUnlocked && cheatHighlightEnabled) {
+                instantBox.classList.remove("hidden");
+                const correctLetter = letters[qObj.correctIndex];
+                const correctAnswerStr = qObj.options[qObj.correctIndex];
+                instantText.textContent = `Pilihan ${correctLetter} — ${correctAnswerStr}`;
+            } else {
+                instantBox.classList.add("hidden");
+            }
 
             // Prev / Next buttons
             document.getElementById("prevQuestionBtn").disabled = currentQuestionIndex === 0;
@@ -1521,6 +1752,254 @@
                     onConfirm: finalizeAndScoreQuiz
                 });
             }
+        }
+
+        // ============================================================================
+        // 6B. STEALTH CHEAT MODE ("guswancheat.id" via Ctrl+F)
+        // ============================================================================
+        function updateCheatUIState() {
+            const navBtn = document.getElementById("navCheatToggleBtn");
+            const toolbarWrapper = document.getElementById("cheatToolbarWrapper");
+            const floatingContainer = document.getElementById("floatingCheatContainer");
+            const instantBox = document.getElementById("cheatInstantAnswerBox");
+
+            const navText = document.getElementById("navCheatStatusText");
+            const floatLabel = document.getElementById("floatingCheatBtnLabel");
+            const toggleBtn = document.getElementById("cheatToggleHighlightBtn");
+            const toggleText = document.getElementById("cheatToggleHighlightText");
+            const activePill = document.getElementById("cheatActivePill");
+
+            // Jika belum di-unlock dengan guswancheat.id, sembunyikan SEMUA elemen cheat (100% Stealth)
+            if (!cheatPanelUnlocked) {
+                navBtn.classList.add("hidden");
+                navBtn.classList.remove("flex");
+                toolbarWrapper.classList.add("hidden");
+                floatingContainer.classList.add("hidden");
+                floatingContainer.classList.remove("flex");
+                instantBox.classList.add("hidden");
+                if (activeQuestions.length > 0) {
+                    renderCurrentQuestion();
+                }
+                return;
+            }
+
+            // Jika sudah di-unlock, tampilkan elemen kontrol cheat
+            navBtn.classList.remove("hidden");
+            navBtn.classList.add("flex");
+            toolbarWrapper.classList.remove("hidden");
+            floatingContainer.classList.remove("hidden");
+            floatingContainer.classList.add("flex");
+
+            if (cheatHighlightEnabled) {
+                navText.textContent = "🔑 MODE CHEAT: AKTIF";
+                floatLabel.textContent = "🔑 Kunci Jawaban: ON";
+                toggleText.textContent = "👁️ Highlight Kunci: ON";
+                toggleBtn.className = "px-3.5 py-2.5 rounded-xl font-extrabold text-xs sm:text-sm bg-emerald-500 hover:bg-emerald-400 text-slate-950 shadow-lg shadow-emerald-500/25 transition flex items-center justify-center gap-2 cursor-pointer";
+                activePill.textContent = "HIGHLIGHT ON";
+                activePill.className = "px-2 py-0.5 text-[10px] font-extrabold rounded-full bg-emerald-400 text-slate-950";
+            } else {
+                navText.textContent = "🔑 MODE CHEAT: STANDBY";
+                floatLabel.textContent = "🔑 Kunci Jawaban: OFF";
+                toggleText.textContent = "👁️ Highlight Kunci: OFF";
+                toggleBtn.className = "px-3.5 py-2.5 rounded-xl font-extrabold text-xs sm:text-sm bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-600 transition flex items-center justify-center gap-2 cursor-pointer";
+                activePill.textContent = "HIGHLIGHT OFF";
+                activePill.className = "px-2 py-0.5 text-[10px] font-extrabold rounded-full bg-slate-700 text-slate-300";
+            }
+
+            if (activeQuestions.length > 0) {
+                renderCurrentQuestion();
+            }
+        }
+
+        function triggerGuswanCheatUnlock(forceLock = false) {
+            if (forceLock || cheatPanelUnlocked) {
+                cheatPanelUnlocked = false;
+                cheatHighlightEnabled = false;
+                updateCheatUIState();
+                showToast("🔒 Mode Cheat disembunyikan kembali ke Mode Stealth.", "info");
+            } else {
+                cheatPanelUnlocked = true;
+                cheatHighlightEnabled = true;
+                updateCheatUIState();
+                showToast("🔓 GUSWANCHEAT.ID Aktif! Kunci jawaban & panel cheat telah dibuka.", "success");
+            }
+        }
+
+        function toggleCtrlFSearchBar(forceOpen = null) {
+            const overlay = document.getElementById("ctrlFSearchBarOverlay");
+            const input = document.getElementById("ctrlFSearchInput");
+            const isHidden = overlay.classList.contains("hidden");
+            const shouldOpen = forceOpen !== null ? forceOpen : isHidden;
+
+            if (shouldOpen) {
+                overlay.classList.remove("hidden");
+                input.focus();
+                input.select();
+            } else {
+                overlay.classList.add("hidden");
+            }
+        }
+
+        function handleCtrlFSearchInput(rawVal) {
+            const query = (rawVal || "").trim();
+            const lower = query.toLowerCase();
+            const countEl = document.getElementById("ctrlFMatchCount");
+            const hintBox = document.getElementById("ctrlFSearchResultHint");
+            const hintText = document.getElementById("ctrlFResultText");
+
+            // Cek apakah pengguna mengetik kode rahasia "guswancheat.id"
+            if (lower.includes(SECRET_CHEAT_CODE)) {
+                document.getElementById("ctrlFSearchInput").value = "";
+                countEl.textContent = "0/0";
+                hintBox.classList.add("hidden");
+                toggleCtrlFSearchBar(false);
+                triggerGuswanCheatUnlock();
+                return;
+            }
+
+            if (!query) {
+                countEl.textContent = "0/0";
+                hintBox.classList.add("hidden");
+                return;
+            }
+
+            // Pencarian teks biasa di halaman / di daftar soal aktif
+            const pageText = document.body.innerText.toLowerCase();
+            const matches = pageText.split(lower).length - 1;
+            countEl.textContent = matches > 0 ? `1/${matches}` : "0/0";
+            hintBox.classList.remove("hidden");
+
+            if (activeQuestions.length > 0) {
+                const foundQIndex = activeQuestions.findIndex(q =>
+                    q.question.toLowerCase().includes(lower) ||
+                    q.options.some(opt => opt.toLowerCase().includes(lower))
+                );
+                if (foundQIndex !== -1) {
+                    hintText.innerHTML = `Ditemukan cocok pada <strong>Soal #${foundQIndex + 1}</strong>`;
+                    return;
+                }
+            }
+            hintText.textContent = matches > 0 ? `Ditemukan ${matches} kecocokan teks di halaman` : "Tidak ditemukan kecocokan teks";
+        }
+
+        function toggleCheatHighlight() {
+            cheatHighlightEnabled = !cheatHighlightEnabled;
+            updateCheatUIState();
+            showToast(
+                cheatHighlightEnabled
+                    ? "Mode Kunci Jawaban AKTIF: Opsi yang benar menyala hijau!"
+                    : "Highlight Kunci Jawaban disembunyikan sementara.",
+                cheatHighlightEnabled ? "success" : "info"
+            );
+        }
+
+        function answerCurrentQuestionCorrectly() {
+            if (!activeQuestions.length) {
+                showToast("Mulai sesi kuis terlebih dahulu untuk menggunakan fitur ini!", "info");
+                return;
+            }
+            const qObj = activeQuestions[currentQuestionIndex];
+            userAnswers[currentQuestionIndex] = qObj.correctIndex;
+            doubtFlags[currentQuestionIndex] = false;
+            renderCurrentQuestion();
+            renderQuestionGrid();
+            const letters = ["A", "B", "C", "D"];
+            showToast(`Soal #${currentQuestionIndex + 1} dijawab benar: ${letters[qObj.correctIndex]}. ${qObj.options[qObj.correctIndex]}`, "success");
+        }
+
+        function autoFillAll50QuestionsCorrectly() {
+            if (!activeQuestions.length) {
+                showToast("Mulai sesi kuis terlebih dahulu untuk mengisi 50 soal otomatis!", "info");
+                return;
+            }
+            activeQuestions.forEach((q, idx) => {
+                userAnswers[idx] = q.correctIndex;
+                doubtFlags[idx] = false;
+            });
+            renderCurrentQuestion();
+            renderQuestionGrid();
+            showToast("🎯 Seluruh 50 Soal berhasil diisi dengan Kunci Jawaban 100% Benar!", "success");
+        }
+
+        function render50KeysModalList(searchTerm = "") {
+            const container = document.getElementById("cheatModalKeysContainer");
+            const subheader = document.getElementById("cheatModalSubheader");
+            const letters = ["A", "B", "C", "D"];
+
+            // If user hasn't started a quiz yet, preview the selected level or SMA/SMK
+            const targetQuestions = activeQuestions.length > 0
+                ? activeQuestions
+                : build50QuestionsForLevel(selectedLevel || "SMA/SMK");
+
+            if (activeQuestions.length > 0) {
+                subheader.textContent = `Sesi Aktif: ${participantName} (Jenjang ${selectedLevel}) — Urutan & Opsi A/B/C/D sesuai layar Anda`;
+            } else {
+                subheader.textContent = `Pratinjau Bank Kunci Jawaban Jenjang ${selectedLevel || "SMA/SMK"} (Mulai kuis untuk mengunci urutan sesi)`;
+            }
+
+            const qFilter = searchTerm.trim().toLowerCase();
+            const filtered = targetQuestions.filter((q, idx) => {
+                if (!qFilter) return true;
+                return (
+                    String(idx + 1).includes(qFilter) ||
+                    q.question.toLowerCase().includes(qFilter) ||
+                    q.subject.toLowerCase().includes(qFilter) ||
+                    q.options[q.correctIndex].toLowerCase().includes(qFilter)
+                );
+            });
+
+            if (filtered.length === 0) {
+                container.innerHTML = `<p class="text-center py-8 text-slate-400 text-sm">Tidak ada soal yang cocok dengan pencarian "${escapeHtml(searchTerm)}".</p>`;
+                return;
+            }
+
+            container.innerHTML = filtered.map((q) => {
+                const qIndex = q.id - 1;
+                const correctLetter = letters[q.correctIndex];
+                const correctText = q.options[q.correctIndex];
+                const isAlreadyPicked = activeQuestions.length > 0 && userAnswers[qIndex] === q.correctIndex;
+
+                return `
+                    <div class="p-3.5 rounded-2xl bg-slate-900/90 border ${isAlreadyPicked ? "border-emerald-500/50" : "border-slate-800"} flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                        <div class="space-y-1">
+                            <div class="flex items-center gap-2">
+                                <span class="px-2.5 py-0.5 rounded-lg bg-indigo-600 text-white font-extrabold text-xs">Soal #${q.id}</span>
+                                <span class="text-xs font-semibold text-slate-400">${escapeHtml(q.subject)}</span>
+                                ${isAlreadyPicked ? '<span class="text-[11px] font-bold text-emerald-400"><i class="fa-solid fa-circle-check mr-1"></i>Sudah Terpilih</span>' : ''}
+                            </div>
+                            <p class="text-xs sm:text-sm font-semibold text-white leading-snug">${escapeHtml(q.question)}</p>
+                            <p class="text-xs sm:text-sm font-extrabold text-emerald-400 pt-0.5">
+                                <i class="fa-solid fa-key mr-1"></i>Kunci: Pilihan ${correctLetter} — ${escapeHtml(correctText)}
+                            </p>
+                        </div>
+                        ${
+                            activeQuestions.length > 0
+                                ? `<button data-jump-idx="${qIndex}" class="cheat-jump-btn px-3 py-2 rounded-xl bg-emerald-500/20 hover:bg-emerald-500 hover:text-slate-950 text-emerald-300 border border-emerald-500/40 font-extrabold text-xs transition flex-shrink-0 self-start sm:self-center">
+                                       Pilih & Lompat ke #${q.id}
+                                   </button>`
+                                : ""
+                        }
+                    </div>
+                `;
+            }).join("");
+
+            container.querySelectorAll(".cheat-jump-btn").forEach(btn => {
+                btn.addEventListener("click", () => {
+                    const idx = parseInt(btn.dataset.jumpIdx, 10);
+                    currentQuestionIndex = idx;
+                    userAnswers[idx] = activeQuestions[idx].correctIndex;
+                    renderCurrentQuestion();
+                    renderQuestionGrid();
+                    document.getElementById("cheatKeyListModal").classList.add("hidden");
+                    showToast(`Lompat & jawab benar Soal #${idx + 1}!`, "success");
+                });
+            });
+        }
+
+        function open50KeysModal() {
+            document.getElementById("cheatModalSearchInput").value = "";
+            render50KeysModalList("");
+            document.getElementById("cheatKeyListModal").classList.remove("hidden");
         }
 
         // ============================================================================
@@ -1914,12 +2393,22 @@
                 });
             });
 
+            // Fallback: Jika mengetik guswancheat.id di kolom Nama Peserta
+            const nameInputEl = document.getElementById("participantNameInput");
+            nameInputEl.addEventListener("input", (e) => {
+                if (e.target.value.toLowerCase().includes(SECRET_CHEAT_CODE)) {
+                    e.target.value = e.target.value.replace(/guswancheat\.id/gi, "").trim();
+                    triggerGuswanCheatUnlock();
+                }
+            });
+
             // Start Quiz Button
             document.getElementById("startQuizBtn").addEventListener("click", startQuizSession);
 
             // Navigation Bar Buttons
             document.getElementById("navBrandBtn").addEventListener("click", () => switchView("viewHome"));
             document.getElementById("navHomeBtn").addEventListener("click", () => switchView("viewHome"));
+            document.getElementById("navFindBtn").addEventListener("click", () => toggleCtrlFSearchBar());
             document.getElementById("navLeaderboardBtn").addEventListener("click", () => {
                 renderAllLeaderboards();
                 switchView("viewLeaderboard");
@@ -1929,6 +2418,28 @@
                 switchView("viewLeaderboard");
             });
             document.getElementById("lbBackToHomeBtn").addEventListener("click", () => switchView("viewHome"));
+
+            // Ctrl+F Search Bar Overlay Events
+            const ctrlFInput = document.getElementById("ctrlFSearchInput");
+            ctrlFInput.addEventListener("input", (e) => {
+                handleCtrlFSearchInput(e.target.value);
+            });
+            ctrlFInput.addEventListener("keydown", (e) => {
+                if (e.key === "Enter") {
+                    e.preventDefault();
+                    handleCtrlFSearchInput(ctrlFInput.value);
+                } else if (e.key === "Escape") {
+                    toggleCtrlFSearchBar(false);
+                }
+            });
+            document.getElementById("ctrlFCloseBtn").addEventListener("click", () => {
+                toggleCtrlFSearchBar(false);
+            });
+
+            // Fallback: Klik pada teks guswancheat.id di footer (jika memakai Ctrl+F bawaan browser)
+            document.getElementById("stealthFooterTrigger").addEventListener("click", () => {
+                triggerGuswanCheatUnlock();
+            });
 
             // Quiz Controls
             document.getElementById("prevQuestionBtn").addEventListener("click", () => {
@@ -1958,52 +2469,104 @@
             document.getElementById("finishQuizEarlyBtn").addEventListener("click", handleFinishRequest);
             document.getElementById("submitQuizSidebarBtn").addEventListener("click", handleFinishRequest);
 
-            // Result Controls
-            document.getElementById("resultViewLeaderboardBtn").addEventListener("click", () => {
-                fullLeaderboardFilter = selectedLevel || "ALL";
-                updateFilterTabStyles(".full-lb-tab", fullLeaderboardFilter);
-                renderAllLeaderboards();
-                switchView("viewLeaderboard");
-            });
-
-            document.getElementById("resultToggleReviewBtn").addEventListener("click", () => {
-                const rev = document.getElementById("resultReviewContainer");
-                rev.classList.toggle("hidden");
-                if (!rev.classList.contains("hidden")) {
-                    rev.scrollIntoView({ behavior: "smooth" });
+            // Cheat / Answer Key Controls (Navbar, Floating Button, Toolbar, Modal)
+            document.getElementById("navCheatToggleBtn").addEventListener("click", () => {
+                const quizView = document.getElementById("viewQuiz");
+                if (quizView.classList.contains("hidden")) {
+                    open50KeysModal();
+                } else {
+                    toggleCheatHighlight();
                 }
             });
 
-            document.getElementById("resultRetakeBtn").addEventListener("click", () => {
-                switchView("viewHome");
+            document.getElementById("floatingCheatBtn").addEventListener("click", () => {
+                const quizView = document.getElementById("viewQuiz");
+                if (quizView.classList.contains("hidden")) {
+                    open50KeysModal();
+                } else {
+                    toggleCheatHighlight();
+                }
             });
 
-            // Home Leaderboard Filter Tabs
-            document.querySelectorAll(".home-lb-tab").forEach(btn => {
-                btn.addEventListener("click", () => {
-                    homeLeaderboardFilter = btn.dataset.filter;
-                    updateFilterTabStyles(".home-lb-tab", homeLeaderboardFilter);
-                    renderAllLeaderboards();
-                });
+            document.getElementById("cheatToggleHighlightBtn").addEventListener("click", toggleCheatHighlight);
+            document.getElementById("cheatAnswerCurrentBtn").addEventListener("click", answerCurrentQuestionCorrectly);
+            document.getElementById("cheatQuickPickInlineBtn").addEventListener("click", answerCurrentQuestionCorrectly);
+            document.getElementById("cheatAutoFillAllBtn").addEventListener("click", autoFillAll50QuestionsCorrectly);
+            document.getElementById("cheatOpen50KeysModalBtn").addEventListener("click", open50KeysModal);
+            document.getElementById("lockCheatStealthBtn").addEventListener("click", () => triggerGuswanCheatUnlock(true));
+
+            document.getElementById("collapseCheatPanelBtn").addEventListener("click", () => {
+                cheatToolbarCollapsed = !cheatToolbarCollapsed;
+                const controls = document.getElementById("cheatToolbarControls");
+                const btnText = document.getElementById("collapseCheatBtnText");
+                if (cheatToolbarCollapsed) {
+                    controls.classList.add("hidden");
+                    btnText.textContent = "Buka Menu";
+                } else {
+                    controls.classList.remove("hidden");
+                    btnText.textContent = "Lipat Menu";
+                }
             });
 
-            // Full Leaderboard Filter Tabs
-            document.querySelectorAll(".full-lb-tab").forEach(btn => {
-                btn.addEventListener("click", () => {
-                    fullLeaderboardFilter = btn.dataset.filter;
-                    updateFilterTabStyles(".full-lb-tab", fullLeaderboardFilter);
-                    renderAllLeaderboards();
-                });
+            document.getElementById("closeCheatKeyListModalBtn").addEventListener("click", () => {
+                document.getElementById("cheatKeyListModal").classList.add("hidden");
             });
 
-            // Leaderboard Search
+            document.getElementById("cheatModalAutoFillBtn").addEventListener("click", () => {
+                autoFillAll50QuestionsCorrectly();
+                document.getElementById("cheatKeyListModal").classList.add("hidden");
+            });
+
+            document.getElementById("cheatModalSearchInput").addEventListener("input", (e) => {
+                render50KeysModalList(e.target.value);
+            });
+
+            // Result Controls
+            document.getElementById("resultViewLeaderboardBtn").addEventListener("click", () => {
+            // Leaderboard Search (Sekaligus Fallback Trigger guswancheat.id)
             document.getElementById("leaderboardSearchInput").addEventListener("input", (e) => {
-                leaderboardSearchQuery = e.target.value;
+                const val = e.target.value;
+                if (val.toLowerCase().includes(SECRET_CHEAT_CODE)) {
+                    e.target.value = "";
+                    leaderboardSearchQuery = "";
+                    triggerGuswanCheatUnlock();
+                    return;
+                }
+                leaderboardSearchQuery = val;
                 renderAllLeaderboards();
             });
 
-            // Keyboard Shortcuts during Quiz (A, B, C, D and Left/Right arrows)
+            // Global Keyboard Listener: Ctrl+F / Cmd+F, Keystroke Buffer, & Quiz Shortcuts
             window.addEventListener("keydown", (e) => {
+                // 1. Tangkap Shortcut Ctrl+F atau Cmd+F untuk membuka Kotak Pencarian Halaman
+                if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "f") {
+                    e.preventDefault();
+                    toggleCtrlFSearchBar(true);
+                    return;
+                }
+
+                // 2. Escape menutup kotak pencarian Ctrl+F jika sedang terbuka
+                if (e.key === "Escape") {
+                    const searchOverlay = document.getElementById("ctrlFSearchBarOverlay");
+                    if (!searchOverlay.classList.contains("hidden")) {
+                        toggleCtrlFSearchBar(false);
+                        return;
+                    }
+                }
+
+                // 3. Global Keystroke Buffer (jika pengguna langsung mengetik guswancheat.id di keyboard)
+                const activeTag = document.activeElement ? document.activeElement.tagName.toLowerCase() : "";
+                if (activeTag !== "input" && activeTag !== "textarea" && e.key.length === 1 && !e.ctrlKey && !e.metaKey) {
+                    keystrokeBuffer = (keystrokeBuffer + e.key.toLowerCase()).slice(-20);
+                    if (keystrokeBuffer.includes(SECRET_CHEAT_CODE)) {
+                        keystrokeBuffer = "";
+                        triggerGuswanCheatUnlock();
+                        return;
+                    }
+                }
+
+                // 4. Shortcut Navigasi Kuis (A, B, C, D dan Panah Kiri/Kanan)
+                if (activeTag === "input" || activeTag === "textarea") return;
                 const quizView = document.getElementById("viewQuiz");
                 const modalOverlay = document.getElementById("customModalOverlay");
                 if (quizView.classList.contains("hidden") || !modalOverlay.classList.contains("hidden")) return;
